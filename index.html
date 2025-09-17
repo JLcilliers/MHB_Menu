@@ -15,14 +15,14 @@
       --light-gray:#F5F5F5;
       --white:#FFFFFF;
       --hover-blue:#1a4a72;
-      --title-blue:#00007C;   /* main item colour */
-      --desc-blue:#BEBEBE;    /* description colour - updated */
+      --title-blue:#00007C; /* main link colour */
+      --desc-blue:#BEBEBE;  /* description colour */
     }
 
     .header{background:var(--white);box-shadow:0 2px 10px rgba(4,30,66,.1);position:relative;z-index:1000}
     .header-container{width:100%;margin:0 auto;padding:0 20px}
 
-    /* Top bar */
+    /* Top bar - keep as is */
     .header-top{display:flex;justify-content:flex-end;align-items:center;padding:8px 30px;background:#BEBEBE;font-size:14px;border-bottom:1px solid #e0e0e0}
     .header-top .header-cta{display:flex;align-items:center;gap:30px}
     .header-top .phone{color:var(--dark-gray);font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:5px}
@@ -30,7 +30,7 @@
     .header-top .cta-button{background:#2E59D7;color:var(--white);padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.5px;transition:.3s}
     .header-top .cta-button:hover{background:#1a4a72;transform:translateY(-1px)}
 
-    /* Header - logo left, nav right */
+    /* Main header */
     .header-main{display:flex;align-items:center;width:100%;padding:15px 0}
     .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
     .logo img{height:60px;width:auto;max-width:350px;object-fit:contain}
@@ -42,10 +42,9 @@
     .nav-link{display:block;padding:15px 20px;color:var(--dark-gray);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.8px;transition:.3s}
     .nav-link:hover{color:var(--navy)}
 
-    /* Dropdown panel - positioned by JS and clamped to viewport */
+    /* Dropdown panel - fixed and clamped by JS */
     .dropdown{
-      position:fixed;           /* viewport anchored */
-      top:0; left:0;
+      position:fixed; top:0; left:0;
       max-width:min(96vw, 1100px);
       background:var(--white);
       box-shadow:0 8px 25px rgba(4,30,66,.15);
@@ -57,59 +56,41 @@
     }
     .dropdown.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
 
-    /* Horizontal content - wraps to new rows, no scroll bars */
-    .dropdown-row{
-      display:flex;
-      flex-wrap:wrap;            /* wrap instead of scrolling */
-      gap:24px;
-      align-items:stretch;
+    /* Generic dropdown content - no boxes, no underlines */
+    .dropdown-inner{
       padding:20px 24px;
-      overflow:visible;          /* ensure no scroll bar appears */
+    }
+    .dropdown a{ text-decoration:none }
+
+    /* Simple horizontal list layout that wraps - no scrollbars */
+    .link-grid{
+      display:flex; flex-wrap:wrap; gap:12px 28px; align-items:flex-start;
+    }
+    .link-item{
+      flex:0 1 240px; /* comfortable column width that wraps as needed */
+    }
+    .link-title{
+      display:block; color:var(--title-blue); font-weight:700; font-size:14px; line-height:1.25; margin-bottom:4px;
+    }
+    .link-desc{
+      display:block; color:var(--desc-blue); font-size:12.5px; line-height:1.35;
     }
 
-    /* Two-line link cards - no underlines */
-    .drop-card{
-      flex:1 1 220px;            /* grows, minimum width 220 */
-      max-width:260px;
-      background:var(--white);
-      border:1px solid #e7e7e7;
-      border-radius:8px;
-      padding:14px;
-      transition:.25s;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      text-decoration:none;
+    /* Sectioned list for Attorneys - two side-by-side groups */
+    .section-row{
+      display:flex; flex-wrap:wrap; gap:28px;
     }
-    .drop-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(4,30,66,.12)}
-    .drop-card *{text-decoration:none}
-    .drop-title{color:var(--title-blue);font-weight:700;font-size:14px;line-height:1.25;text-transform:none;letter-spacing:.2px}
-    .drop-desc{color:var(--desc-blue);font-size:12.5px;line-height:1.35}
-
-    /* Attorneys layout - wrap, no scroll bars */
-    .attorney-row{
-      display:flex;
-      flex-wrap:wrap;            /* wrap instead of scrolling */
-      gap:20px;
-      padding:20px 24px;
-      overflow:visible;
+    .section{
+      flex:1 1 320px; min-width:260px;
     }
-    .attorney-card{
-      flex:1 1 220px;
-      max-width:260px;
-      background:var(--light-gray);
-      padding:14px;
-      border-radius:8px;
-      text-align:center;
-      transition:.25s;
-      border:1px solid #e0e0e0;
-      text-decoration:none;
+    .section h4{
+      color:var(--title-blue); font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:.4px;
+      margin-bottom:10px; border-bottom:2px solid var(--silver); padding-bottom:6px;
     }
-    .attorney-card:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(4,30,66,.1)}
-    .attorney-card h5{color:var(--title-blue);margin-bottom:4px;font-size:13px;font-weight:700}
-    .attorney-card p{color:var(--dark-gray);font-size:11.5px;margin-bottom:8px}
-    .attorney-card a,
-    .attorney-card span{color:#2E59D7;font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;text-decoration:none}
+    .section ul{ list-style:none; }
+    .section li{ margin:8px 0; }
+    .section a{ color:var(--dark-gray); font-size:14px; font-weight:500; }
+    .section a:hover{ color:var(--navy); }
 
     .mobile-toggle{display:none;background:none;border:none;color:var(--dark-gray);font-size:24px;cursor:pointer;padding:10px}
 
@@ -130,10 +111,11 @@
       .nav-item{width:100%;margin:0;border-bottom:1px solid #e0e0e0}
       .nav-link{padding:18px 20px;font-size:14px;border:none}
 
-      /* Mobile - stacked blocks */
+      /* Mobile dropdowns become stacked blocks */
       .dropdown{position:static;max-width:none;box-shadow:none;border-top:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}
-      .drop-card,.attorney-card{flex:1 1 100%;max-width:none}
-      .dropdown-row,.attorney-row{gap:16px;padding:16px}
+      .section{flex:1 1 100%}
+      .link-item{flex:1 1 100%}
+      .dropdown-inner{padding:16px}
     }
     @media (max-width:480px){
       .header-container{padding:0 15px}
@@ -162,101 +144,112 @@
       <nav>
         <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
         <ul class="main-nav" id="mainNav">
-          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+          <!-- Home removed per feedback -->
 
-          <!-- ATTORNEYS -->
+          <!-- ATTORNEYS - two lists, no boxes -->
           <li class="nav-item" data-drop="attorneys">
             <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
             <div class="dropdown" id="drop-attorneys" role="menu" aria-hidden="true">
-              <div class="attorney-row">
-                <a class="attorney-card" href="/about-our-firm/attorneys/constance-mims/">
-                  <h5>Constance Mims</h5><p>Managing Partner</p><span>View Profile</span>
-                </a>
-                <a class="attorney-card" href="/about-our-firm/attorneys/bryan-ballew/">
-                  <h5>Bryan Ballew</h5><p>Partner</p><span>View Profile</span>
-                </a>
-                <a class="attorney-card" href="/about-our-firm/attorneys/matt-riek/">
-                  <h5>Matt Riek</h5><p>Partner</p><span>View Profile</span>
-                </a>
-                <a class="attorney-card" href="/about-our-firm/attorneys/kelly-hollingsworth/">
-                  <h5>Kelly Hollingsworth</h5><p>Partner</p><span>View Profile</span>
-                </a>
-                <a class="attorney-card" href="/about-our-firm/attorneys/tim-alexander/">
-                  <h5>Tim Alexander</h5><p>Partner</p><span>View Profile</span>
-                </a>
-                <a class="attorney-card" href="/about-our-firm/attorneys/andrew-mcalester/">
-                  <h5>Andrew McAlester</h5><p>Partner</p><span>View Profile</span>
-                </a>
+              <div class="dropdown-inner">
+                <div class="section-row">
+                  <div class="section">
+                    <h4>Partners</h4>
+                    <ul>
+                      <li><a href="/about-our-firm/attorneys/constance-mims/">Constance Mims</a></li>
+                      <li><a href="/about-our-firm/attorneys/bryan-ballew/">Bryan Ballew</a></li>
+                      <li><a href="/about-our-firm/attorneys/matt-riek/">Matt Riek</a></li>
+                      <li><a href="/about-our-firm/attorneys/kelly-hollingsworth/">Kelly Hollingsworth</a></li>
+                      <li><a href="/about-our-firm/attorneys/tim-alexander/">Tim Alexander</a></li>
+                      <li><a href="/about-our-firm/attorneys/andrew-mcalester/">Andrew McAlester</a></li>
+                    </ul>
+                  </div>
+                  <div class="section">
+                    <h4>Attorneys</h4>
+                    <ul>
+                      <li><a href="/about-our-firm/attorneys/alexis-gebhardt/">Alexis Gebhardt</a></li>
+                      <li><a href="/about-our-firm/attorneys/allison-luttrell/">Allison H. Luttrell</a></li>
+                      <li><a href="/about-our-firm/attorneys/madison-l-easterlin/">Madison L. Easterlin</a></li>
+                      <li><a href="/about-our-firm/attorneys/haley-m-shaw/">Haley M. Shaw</a></li>
+                      <li><a href="/about-our-firm/attorneys/jessica-alvarez/">Jessica Alvarez</a></li>
+                      <li><a href="/about-our-firm/attorneys/rayasia-asia-alexis-myles/">Rayasia "Asia" Alexis Myles</a></li>
+                      <li><a href="/about-our-firm/attorneys/brian-alpiger/">Brian Alpiger</a></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </li>
 
-          <!-- FAMILY LAW SERVICES -->
+          <!-- FAMILY LAW - simple list items with soft descriptions in #BEBEBE -->
           <li class="nav-item" data-drop="fls">
             <a href="/practice-areas/" class="nav-link">Family Law Services</a>
             <div class="dropdown" id="drop-fls" role="menu" aria-hidden="true">
-              <div class="dropdown-row">
-                <a class="drop-card" href="/fort-worth-divorce-lawyer/">
-                  <span class="drop-title">Divorce</span>
-                  <span class="drop-desc">Guidance on contested and uncontested divorce</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-child-support-attorney/">
-                  <span class="drop-title">Child Support</span>
-                  <span class="drop-desc">Establishment, modification, and enforcement</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-child-custody-attorney/">
-                  <span class="drop-title">Child Custody</span>
-                  <span class="drop-desc">Possession schedules and parental rights</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-property-division-attorney/">
-                  <span class="drop-title">Property Division</span>
-                  <span class="drop-desc">Equitable division of marital assets</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-high-net-worth-divorce-lawyer/">
-                  <span class="drop-title">High Net Worth Divorce</span>
-                  <span class="drop-desc">Complex assets, valuations, and protections</span>
-                </a>
-                <a class="drop-card" href="/mediation-attorney/">
-                  <span class="drop-title">Mediation</span>
-                  <span class="drop-desc">Private dispute resolution with counsel</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-prenuptial-agreements-attorney/">
-                  <span class="drop-title">Prenuptial Agreements</span>
-                  <span class="drop-desc">Plan ahead to protect separate property</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-postnuptial-agreements-attorney/">
-                  <span class="drop-title">Postnuptial Agreements</span>
-                  <span class="drop-desc">Update terms after marriage begins</span>
-                </a>
-                <a class="drop-card" href="/fort-worth-appeals-attorney/">
-                  <span class="drop-title">Appeals</span>
-                  <span class="drop-desc">Challenging trial outcomes in higher courts</span>
-                </a>
-                <a class="drop-card" href="/mediation-attorney/">
-                  <span class="drop-title">Collaborative Law</span>
-                  <span class="drop-desc">Team-based solutions without litigation</span>
-                </a>
+              <div class="dropdown-inner">
+                <div class="link-grid">
+                  <a class="link-item" href="/fort-worth-divorce-lawyer/">
+                    <span class="link-title">Divorce</span>
+                    <span class="link-desc">Contested and uncontested matters</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-child-support-attorney/">
+                    <span class="link-title">Child Support</span>
+                    <span class="link-desc">Establishment, modification, enforcement</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-child-custody-attorney/">
+                    <span class="link-title">Child Custody</span>
+                    <span class="link-desc">Possession schedules and rights</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-property-division-attorney/">
+                    <span class="link-title">Property Division</span>
+                    <span class="link-desc">Equitable division of assets</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-high-net-worth-divorce-lawyer/">
+                    <span class="link-title">High Net Worth Divorce</span>
+                    <span class="link-desc">Complex assets and valuations</span>
+                  </a>
+                  <a class="link-item" href="/mediation-attorney/">
+                    <span class="link-title">Mediation</span>
+                    <span class="link-desc">Private dispute resolution</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-prenuptial-agreements-attorney/">
+                    <span class="link-title">Prenuptial Agreements</span>
+                    <span class="link-desc">Protect separate property</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-postnuptial-agreements-attorney/">
+                    <span class="link-title">Postnuptial Agreements</span>
+                    <span class="link-desc">Terms after marriage begins</span>
+                  </a>
+                  <a class="link-item" href="/fort-worth-appeals-attorney/">
+                    <span class="link-title">Appeals</span>
+                    <span class="link-desc">Challenging outcomes</span>
+                  </a>
+                  <a class="link-item" href="/mediation-attorney/">
+                    <span class="link-title">Collaborative Law</span>
+                    <span class="link-desc">Team based solutions</span>
+                  </a>
+                </div>
               </div>
             </div>
           </li>
 
-          <!-- BUSINESS LITIGATION -->
+          <!-- BUSINESS LITIGATION - simple list -->
           <li class="nav-item" data-drop="bizlit">
             <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
             <div class="dropdown" id="drop-bizlit" role="menu" aria-hidden="true">
-              <div class="dropdown-row">
-                <a class="drop-card" href="/texas-business-litigation-attorney/">
-                  <span class="drop-title">Business Litigation</span>
-                  <span class="drop-desc">Claims, defence, and injunction practice</span>
-                </a>
-                <a class="drop-card" href="/texas-business-litigation-attorney/">
-                  <span class="drop-title">Contract Disputes</span>
-                  <span class="drop-desc">Breach, performance, and damages strategy</span>
-                </a>
-                <a class="drop-card" href="/texas-business-litigation-attorney/">
-                  <span class="drop-title">Outside General Counsel</span>
-                  <span class="drop-desc">Proactive advice for growing companies</span>
-                </a>
+              <div class="dropdown-inner">
+                <div class="link-grid">
+                  <a class="link-item" href="/texas-business-litigation-attorney/">
+                    <span class="link-title">Business Litigation</span>
+                    <span class="link-desc">Claims, defence, injunctions</span>
+                  </a>
+                  <a class="link-item" href="/texas-business-litigation-attorney/">
+                    <span class="link-title">Contract Disputes</span>
+                    <span class="link-desc">Breach, performance, damages</span>
+                  </a>
+                  <a class="link-item" href="/texas-business-litigation-attorney/">
+                    <span class="link-title">Outside General Counsel</span>
+                    <span class="link-desc">Proactive advice for growth</span>
+                  </a>
+                </div>
               </div>
             </div>
           </li>
@@ -265,19 +258,21 @@
           <li class="nav-item" data-drop="news">
             <a href="/blog/" class="nav-link">News &amp; Insights</a>
             <div class="dropdown" id="drop-news" role="menu" aria-hidden="true">
-              <div class="dropdown-row">
-                <a class="drop-card" href="/blog/">
-                  <span class="drop-title">Blog</span>
-                  <span class="drop-desc">Articles on family and business law</span>
-                </a>
-                <a class="drop-card" href="/faqs/">
-                  <span class="drop-title">FAQs</span>
-                  <span class="drop-desc">Straight answers to common questions</span>
-                </a>
-                <a class="drop-card" href="/testimonials/">
-                  <span class="drop-title">Testimonials</span>
-                  <span class="drop-desc">What clients say about our team</span>
-                </a>
+              <div class="dropdown-inner">
+                <div class="link-grid">
+                  <a class="link-item" href="/blog/">
+                    <span class="link-title">Blog</span>
+                    <span class="link-desc">Articles and updates</span>
+                  </a>
+                  <a class="link-item" href="/faqs/">
+                    <span class="link-title">FAQs</span>
+                    <span class="link-desc">Common questions answered</span>
+                  </a>
+                  <a class="link-item" href="/testimonials/">
+                    <span class="link-title">Testimonials</span>
+                    <span class="link-desc">Client experiences</span>
+                  </a>
+                </div>
               </div>
             </div>
           </li>
@@ -286,19 +281,21 @@
           <li class="nav-item" data-drop="about">
             <a href="/about-our-firm/" class="nav-link">About</a>
             <div class="dropdown" id="drop-about" role="menu" aria-hidden="true">
-              <div class="dropdown-row">
-                <a class="drop-card" href="/about-our-firm/">
-                  <span class="drop-title">Our Story</span>
-                  <span class="drop-desc">Dedicated counsel serving Fort Worth</span>
-                </a>
-                <a class="drop-card" href="/about-our-firm/">
-                  <span class="drop-title">Awards &amp; Accolades</span>
-                  <span class="drop-desc">Recognition for excellence in advocacy</span>
-                </a>
-                <a class="drop-card" href="/about-our-firm/">
-                  <span class="drop-title">Careers</span>
-                  <span class="drop-desc">Join a client-first litigation team</span>
-                </a>
+              <div class="dropdown-inner">
+                <div class="link-grid">
+                  <a class="link-item" href="/about-our-firm/">
+                    <span class="link-title">Our Story</span>
+                    <span class="link-desc">Dedicated counsel serving Fort Worth</span>
+                  </a>
+                  <a class="link-item" href="/about-our-firm/">
+                    <span class="link-title">Awards &amp; Accolades</span>
+                    <span class="link-desc">Recognition for excellence</span>
+                  </a>
+                  <a class="link-item" href="/about-our-firm/">
+                    <span class="link-title">Careers</span>
+                    <span class="link-desc">Join our team</span>
+                  </a>
+                </div>
               </div>
             </div>
           </li>
@@ -316,7 +313,7 @@
     nav.classList.toggle('active');
   }
 
-  // Viewport-aware dropdown positioning with clamping
+  // Viewport aware positioning with clamping
   const SAFE_MARGIN = 16; // px
   const items = document.querySelectorAll('.nav-item');
 
@@ -343,31 +340,25 @@
   });
 
   function positionPanel(item, panel){
-    // Reset to get natural size after wrapping
-    panel.style.left = '0px';
-    panel.style.top = '0px';
-
+    panel.style.left='0px'; panel.style.top='0px';
     const itemRect = item.getBoundingClientRect();
 
-    // Temporarily make visible to measure if not already
+    // Ensure natural size after wrapping
     const wasHidden = !panel.classList.contains('show');
-    if(wasHidden){ panel.classList.add('show'); }
+    if(wasHidden) panel.classList.add('show');
 
     const panelRect = panel.getBoundingClientRect();
-
-    // Centre on trigger, then clamp within viewport
     let left = itemRect.left + itemRect.width/2 - panelRect.width/2;
     left = Math.max(SAFE_MARGIN, Math.min(left, window.innerWidth - panelRect.width - SAFE_MARGIN));
-
     const top = itemRect.bottom + window.scrollY;
 
     panel.style.left = `${left}px`;
     panel.style.top  = `${top}px`;
 
-    if(wasHidden){ panel.classList.remove('show'); }
+    if(wasHidden) panel.classList.remove('show');
   }
 
-  // Close mobile menu on outside click
+  // Close mobile menu when clicking outside
   document.addEventListener('click',function(e){
     const nav=document.getElementById('mainNav');
     const toggle=document.querySelector('.mobile-toggle');
