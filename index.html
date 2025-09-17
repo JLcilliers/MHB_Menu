@@ -22,6 +22,7 @@
     .header{background:var(--white);box-shadow:0 2px 10px rgba(4,30,66,.1);position:relative;z-index:1000}
     .header-container{width:100%;margin:0 auto;padding:0 20px}
 
+    /* Top bar */
     .header-top{display:flex;justify-content:flex-end;align-items:center;padding:8px 30px;background:#BEBEBE;font-size:14px;border-bottom:1px solid #e0e0e0}
     .header-top .header-cta{display:flex;align-items:center;gap:30px}
     .header-top .phone{color:var(--dark-gray);font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:5px}
@@ -29,6 +30,7 @@
     .header-top .cta-button{background:#2E59D7;color:var(--white);padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.5px;transition:.3s}
     .header-top .cta-button:hover{background:#1a4a72;transform:translateY(-1px)}
 
+    /* Header - logo left, nav right */
     .header-main{display:flex;align-items:center;width:100%;padding:15px 0}
     .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
     .logo img{height:60px;width:auto;max-width:350px;object-fit:contain}
@@ -40,15 +42,22 @@
     .nav-link{display:block;padding:15px 20px;color:var(--dark-gray);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.8px;transition:.3s}
     .nav-link:hover{color:var(--navy)}
 
-    /* Base dropdown panel */
+    /* Dropdown panel - JS toggles .show and positions it; default hidden */
     .dropdown{
-      position:absolute;top:100%;left:0;right:auto;min-width:480px;background:var(--white);
-      box-shadow:0 8px 25px rgba(4,30,66,.15);opacity:0;visibility:hidden;transform:translateY(-10px);
-      transition:.3s;z-index:999;border-top:3px solid var(--navy)
+      position:fixed;            /* fixed to viewport so we can clamp safely */
+      top:0; left:0;             /* actual coordinates are set by JS */
+      max-width:min(92vw, 1000px);
+      background:var(--white);
+      box-shadow:0 8px 25px rgba(4,30,66,.15);
+      border-top:3px solid var(--navy);
+      opacity:0; visibility:hidden; pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+      transform:translateY(-6px);
+      z-index:999;
     }
-    .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+    .dropdown.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
 
-    /* Horizontal layout inside dropdown */
+    /* Horizontal content row */
     .dropdown-row{
       display:flex;flex-wrap:nowrap;gap:28px;align-items:stretch;
       padding:20px 24px;overflow-x:auto;scrollbar-width:thin
@@ -56,26 +65,16 @@
     .dropdown-row::-webkit-scrollbar{height:8px}
     .dropdown-row::-webkit-scrollbar-thumb{background:#d4d7da;border-radius:8px}
 
-    /* Card for each link with title + description */
-    .drop-card{
-      flex:0 0 220px;background:var(--white);border:1px solid #e7e7e7;border-radius:8px;
-      padding:14px 14px;transition:.25s;display:flex;flex-direction:column;gap:6px
-    }
+    /* Two-line link cards - no underlines anywhere inside */
+    .drop-card{flex:0 0 220px;background:var(--white);border:1px solid #e7e7e7;border-radius:8px;padding:14px;transition:.25s;display:flex;flex-direction:column;gap:6px;text-decoration:none}
     .drop-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(4,30,66,.12)}
-    .drop-card a{ text-decoration:none }
-    .drop-title{
-      color:var(--title-blue);font-weight:700;font-size:14px;line-height:1.25;text-transform:none;letter-spacing:.2px
-    }
-    .drop-desc{
-      color:var(--desc-blue);font-size:12.5px;line-height:1.35
-    }
+    .drop-card *{text-decoration:none}
+    .drop-title{color:var(--title-blue);font-weight:700;font-size:14px;line-height:1.25;text-transform:none;letter-spacing:.2px}
+    .drop-desc{color:var(--desc-blue);font-size:12.5px;line-height:1.35}
 
-    /* Keep your attorneys mega dropdown centered and horizontal too */
-    .dropdown.attorneys-dropdown{left:50%;transform:translateX(-50%);min-width:860px}
-    .attorney-row{display:flex;gap:20px;padding:20px 24px;overflow-x:auto}
-    .attorney-card{
-      flex:0 0 200px;background:var(--light-gray);padding:14px;border-radius:8px;text-align:center;transition:.25s;border:1px solid #e0e0e0
-    }
+    /* Attorneys horizontal */
+    .attorney-row{display:flex;gap:20px;padding:20px 24px;overflow-x:auto;scrollbar-width:thin}
+    .attorney-card{flex:0 0 200px;background:var(--light-gray);padding:14px;border-radius:8px;text-align:center;transition:.25s;border:1px solid #e0e0e0;text-decoration:none}
     .attorney-card:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(4,30,66,.1)}
     .attorney-card h5{color:var(--title-blue);margin-bottom:4px;font-size:13px;font-weight:700}
     .attorney-card p{color:var(--dark-gray);font-size:11.5px;margin-bottom:8px}
@@ -85,28 +84,25 @@
 
     @media (max-width:1200px){
       .nav-link{padding:15px 15px;font-size:13px}
-      .dropdown.attorneys-dropdown{min-width:720px}
     }
     @media (max-width:992px){
       .nav-link{padding:15px 12px;font-size:12px}
-      .dropdown{min-width:420px}
-      .dropdown.attorneys-dropdown{min-width:600px}
     }
     @media (max-width:768px){
       .header-container{padding:0 20px}
       .header-top{padding:5px 20px}
       .header-top .header-cta{gap:15px}
       .mobile-toggle{display:block}
+
       .main-nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);flex-direction:column;box-shadow:0 5px 20px rgba(0,0,0,.1);border-top:1px solid #e0e0e0}
       .main-nav.active{display:flex}
       .nav-item{width:100%;margin:0;border-bottom:1px solid #e0e0e0}
       .nav-link{padding:18px 20px;font-size:14px;border:none}
 
-      /* Mobile dropdowns become stacked for readability */
-      .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;background:var(--light-gray);border-top:none;min-width:auto}
+      /* Mobile - dropdowns stack rather than horizontal scroll */
+      .dropdown{position:static;max-width:none;box-shadow:none;border-top:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}
       .dropdown-row{flex-wrap:wrap;gap:16px;overflow-x:visible;padding:16px}
       .drop-card{flex:1 1 calc(50% - 16px)}
-      .dropdown.attorneys-dropdown{left:0;transform:none;min-width:auto}
       .attorney-row{gap:16px;padding:16px;overflow-x:visible;flex-wrap:wrap}
       .attorney-card{flex:1 1 calc(50% - 16px)}
     }
@@ -140,48 +136,37 @@
         <ul class="main-nav" id="mainNav">
           <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
 
-          <!-- ATTORNEYS - horizontal cards -->
-          <li class="nav-item">
+          <!-- ATTORNEYS -->
+          <li class="nav-item" data-drop="attorneys">
             <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
-            <div class="dropdown attorneys-dropdown">
+            <div class="dropdown" id="drop-attorneys" role="menu" aria-hidden="true">
               <div class="attorney-row">
-                <div class="attorney-card">
-                  <h5>Constance Mims</h5><p>Managing Partner</p>
-                  <a href="/about-our-firm/attorneys/constance-mims/">View Profile</a>
-                </div>
-                <div class="attorney-card">
-                  <h5>Bryan Ballew</h5><p>Partner</p>
-                  <a href="/about-our-firm/attorneys/bryan-ballew/">View Profile</a>
-                </div>
-                <div class="attorney-card">
-                  <h5>Matt Riek</h5><p>Partner</p>
-                  <a href="/about-our-firm/attorneys/matt-riek/">View Profile</a>
-                </div>
-                <div class="attorney-card">
-                  <h5>Kelly Hollingsworth</h5><p>Partner</p>
-                  <a href="/about-our-firm/attorneys/kelly-hollingsworth/">View Profile</a>
-                </div>
-                <div class="attorney-card">
-                  <h5>Tim Alexander</h5><p>Partner</p>
-                  <a href="/about-our-firm/attorneys/tim-alexander/">View Profile</a>
-                </div>
-                <div class="attorney-card">
-                  <h5>Andrew McAlester</h5><p>Partner</p>
-                  <a href="/about-our-firm/attorneys/andrew-mcalester/">View Profile</a>
-                </div>
-                <!-- Associates as compact cards -->
-                <div class="attorney-card">
-                  <h5>Associate Team</h5><p>View all associates</p>
-                  <a href="/about-our-firm/attorneys/">Browse</a>
-                </div>
+                <a class="attorney-card" href="/about-our-firm/attorneys/constance-mims/">
+                  <h5>Constance Mims</h5><p>Managing Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                </a>
+                <a class="attorney-card" href="/about-our-firm/attorneys/bryan-ballew/">
+                  <h5>Bryan Ballew</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                </a>
+                <a class="attorney-card" href="/about-our-firm/attorneys/matt-riek/">
+                  <h5>Matt Riek</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                </a>
+                <a class="attorney-card" href="/about-our-firm/attorneys/kelly-hollingsworth/">
+                  <h5>Kelly Hollingsworth</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                </a>
+                <a class="attorney-card" href="/about-our-firm/attorneys/tim-alexander/">
+                  <h5>Tim Alexander</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                </a>
+                <a class="attorney-card" href="/about-our-firm/attorneys/andrew-mcalester/">
+                  <h5>Andrew McAlester</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                </a>
               </div>
             </div>
           </li>
 
-          <!-- FAMILY LAW SERVICES - horizontal link cards -->
-          <li class="nav-item">
+          <!-- FAMILY LAW SERVICES -->
+          <li class="nav-item" data-drop="fls">
             <a href="/practice-areas/" class="nav-link">Family Law Services</a>
-            <div class="dropdown">
+            <div class="dropdown" id="drop-fls" role="menu" aria-hidden="true">
               <div class="dropdown-row">
                 <a class="drop-card" href="/fort-worth-divorce-lawyer/">
                   <span class="drop-title">Divorce</span>
@@ -227,10 +212,10 @@
             </div>
           </li>
 
-          <!-- BUSINESS LITIGATION - horizontal link cards -->
-          <li class="nav-item">
+          <!-- BUSINESS LITIGATION -->
+          <li class="nav-item" data-drop="bizlit">
             <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
-            <div class="dropdown">
+            <div class="dropdown" id="drop-bizlit" role="menu" aria-hidden="true">
               <div class="dropdown-row">
                 <a class="drop-card" href="/texas-business-litigation-attorney/">
                   <span class="drop-title">Business Litigation</span>
@@ -248,10 +233,10 @@
             </div>
           </li>
 
-          <!-- NEWS - horizontal link cards -->
-          <li class="nav-item">
+          <!-- NEWS -->
+          <li class="nav-item" data-drop="news">
             <a href="/blog/" class="nav-link">News &amp; Insights</a>
-            <div class="dropdown">
+            <div class="dropdown" id="drop-news" role="menu" aria-hidden="true">
               <div class="dropdown-row">
                 <a class="drop-card" href="/blog/">
                   <span class="drop-title">Blog</span>
@@ -269,10 +254,10 @@
             </div>
           </li>
 
-          <!-- ABOUT - horizontal link cards -->
-          <li class="nav-item">
+          <!-- ABOUT -->
+          <li class="nav-item" data-drop="about">
             <a href="/about-our-firm/" class="nav-link">About</a>
-            <div class="dropdown">
+            <div class="dropdown" id="drop-about" role="menu" aria-hidden="true">
               <div class="dropdown-row">
                 <a class="drop-card" href="/about-our-firm/">
                   <span class="drop-title">Our Story</span>
@@ -302,10 +287,61 @@
     const nav=document.getElementById('mainNav');
     nav.classList.toggle('active');
   }
+
+  // Viewport-aware dropdown positioning with clamping
+  const SAFE_MARGIN = 16; // px
+  const items = document.querySelectorAll('.nav-item');
+
+  items.forEach(item=>{
+    const panel = item.querySelector('.dropdown');
+    if(!panel) return;
+
+    // open and position on hover or focus
+    const open = () => {
+      panel.classList.add('show');
+      positionPanel(item, panel);
+    };
+    const close = () => panel.classList.remove('show');
+
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', (e)=>{
+      // if moving into panel, keep open
+      if(!panel.contains(e.relatedTarget)) close();
+    });
+    item.addEventListener('focusin', open);
+
+    panel.addEventListener('mouseenter', ()=>panel.classList.add('show'));
+    panel.addEventListener('mouseleave', close);
+    window.addEventListener('resize', ()=>{ if(panel.classList.contains('show')) positionPanel(item, panel); });
+    window.addEventListener('scroll', ()=>{ if(panel.classList.contains('show')) positionPanel(item, panel); }, {passive:true});
+  });
+
+  function positionPanel(item, panel){
+    // Reset inline styles first
+    panel.style.left = '0px';
+    panel.style.top = '0px';
+
+    const itemRect = item.getBoundingClientRect();
+    const panelRect = panel.getBoundingClientRect();
+
+    // Desired centred x based on the triggering item
+    let left = itemRect.left + itemRect.width/2 - panelRect.width/2;
+
+    // Clamp within viewport with a small margin
+    left = Math.max(SAFE_MARGIN, Math.min(left, window.innerWidth - panelRect.width - SAFE_MARGIN));
+
+    // Just below the item
+    const top = itemRect.bottom + window.scrollY;
+
+    panel.style.left = `${left}px`;
+    panel.style.top  = `${top}px`;
+  }
+
+  // Close mobile menu if clicking outside
   document.addEventListener('click',function(e){
     const nav=document.getElementById('mainNav');
     const toggle=document.querySelector('.mobile-toggle');
-    if(!nav.contains(e.target)&&!toggle.contains(e.target)){nav.classList.remove('active');}
+    if(!nav.contains(e.target) && !toggle.contains(e.target)){ nav.classList.remove('active'); }
   });
 </script>
 </body>
