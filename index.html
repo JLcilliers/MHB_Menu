@@ -83,9 +83,11 @@
         .header-main {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Pushes logo and nav to opposite ends */
             padding: 15px 0;
             width: 100%;
+        }
+        .header-main nav {
+            margin-left: auto;
         }
         .logo {
             display: flex;
@@ -109,7 +111,7 @@
         }
         .nav-item {
             position: relative;
-            margin: 0 5px; /* Small margin for spacing between items */
+            margin: 0 10px;
         }
         .nav-link {
             display: block;
@@ -296,6 +298,9 @@
             }
             .mobile-toggle {
                 display: block;
+            }
+            .header-main nav {
+                margin-left: 0;
             }
             .main-nav {
                 display: none;
