@@ -90,18 +90,21 @@
             transform: translateY(-1px);
         }
 
-        /* Main Header */
+        /* Main Header - Updated for far right positioning */
         .header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
+            width: 100%;
         }
 
         .logo {
             display: flex;
             align-items: center;
             text-decoration: none;
+            /* Ensure logo stays on far left */
+            margin-right: auto;
         }
 
         .logo img {
@@ -111,14 +114,17 @@
             object-fit: contain;
         }
 
-        /* Navigation - KoonsFuller Style */
+        /* Navigation - Pushed to far right */
         .main-nav {
             display: flex;
             align-items: center;
             list-style: none;
             margin: 0;
             padding: 0;
+            /* Remove margin-left: auto since we're using space-between */
+            /* Push navigation to the absolute far right */
             margin-left: auto;
+            padding-right: 0;
         }
 
         .nav-item {
@@ -212,7 +218,7 @@
         }
 
         .dropdown-links a::before {
-            content: '▶';
+            content: '▸';
             position: absolute;
             left: 0;
             color: var(--silver);
@@ -283,10 +289,11 @@
             padding-left: 0 !important;
         }
 
-        /* Wide Dropdown for Attorneys */
+        /* Wide Dropdown for Attorneys - Adjusted positioning for far right */
         .dropdown.attorneys-dropdown {
             min-width: 650px;
-            left: -200px;
+            /* Adjust left positioning to prevent overflow when nav is far right */
+            left: -400px;
         }
 
         /* Mobile Menu Toggle */
@@ -306,6 +313,10 @@
                 padding: 15px 15px;
                 font-size: 13px;
             }
+            
+            .dropdown.attorneys-dropdown {
+                left: -300px;
+            }
         }
 
         @media (max-width: 992px) {
@@ -315,7 +326,7 @@
             }
 
             .dropdown.attorneys-dropdown {
-                left: -150px;
+                left: -200px;
                 min-width: 500px;
             }
         }
