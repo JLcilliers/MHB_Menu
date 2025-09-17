@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBH Texas - Modern Mega Menu</title>
+    <title>MBH Texas - Professional Header</title>
     <style>
         * {
             margin: 0;
@@ -29,8 +29,8 @@
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--hover-blue) 100%);
-            box-shadow: 0 4px 20px rgba(4, 30, 66, 0.15);
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(4, 30, 66, 0.1);
             position: relative;
             z-index: 1000;
         }
@@ -41,317 +41,251 @@
             padding: 0 20px;
         }
 
+        /* Top Bar (like KoonsFuller) */
         .header-top {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 8px 0;
+            background: var(--light-gray);
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header-top .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .header-top .phone {
+            color: var(--dark-gray);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-top .phone:hover {
+            color: var(--navy);
+        }
+
+        .header-top .cta-button {
+            background: var(--navy);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .header-top .cta-button:hover {
+            background: var(--hover-blue);
+            transform: translateY(-1px);
+        }
+
+        /* Main Header */
+        .header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-            border-bottom: 1px solid rgba(134, 147, 151, 0.2);
         }
 
         .logo {
             display: flex;
             align-items: center;
             text-decoration: none;
-            padding: 5px 0;
         }
 
         .logo img {
-            height: 35px;
+            height: 40px;
             width: auto;
-            max-width: 200px;
+            max-width: 250px;
             object-fit: contain;
         }
 
-        /* Fallback text if logo doesn't load */
-        .logo-text {
-            color: var(--white);
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: -0.5px;
-        }
-
-        .header-cta {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .phone {
-            color: var(--silver);
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cta-button {
-            background: var(--silver);
-            color: var(--navy);
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .cta-button:hover {
-            background: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Navigation */
-        .nav-container {
-            position: relative;
-            overflow: visible;
-        }
-
+        /* Navigation - KoonsFuller Style */
         .main-nav {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            list-style: none;
+            margin: 0;
             padding: 0;
-            position: relative;
         }
 
         .nav-item {
             position: relative;
-            list-style: none;
+            margin: 0 5px;
         }
 
         .nav-link {
             display: block;
-            padding: 20px 25px;
-            color: var(--white);
+            padding: 15px 20px;
+            color: var(--dark-gray);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--silver);
+            color: var(--navy);
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: var(--silver);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after {
-            width: 80%;
-        }
-
-        /* Mega Menu - OPTIMIZED SPACING */
-        .mega-menu {
+        /* Simple Dropdown (like KoonsFuller) */
+        .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            right: 0;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
+            min-width: 280px;
             background: var(--white);
-            box-shadow: 0 10px 40px rgba(4, 30, 66, 0.15);
+            box-shadow: 0 8px 25px rgba(4, 30, 66, 0.15);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.4s ease;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
             z-index: 999;
-            border-top: 3px solid var(--silver);
+            border-top: 3px solid var(--navy);
         }
 
-        .nav-item:hover .mega-menu {
+        .nav-item:hover .dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        /* IMPROVED: Better horizontal space utilization */
-        .mega-content {
-            max-width: 1200px; /* Increased from 900px for better space usage */
-            margin: 0 auto;
-            padding: 25px 40px; /* Increased horizontal padding for better balance */
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px; /* Increased gap for better visual separation */
+        .dropdown-content {
+            padding: 20px 0;
         }
 
-        /* Special layout for attorneys dropdown - OPTIMIZED */
-        .mega-content.attorneys-layout {
-            grid-template-columns: 1.5fr 1fr 1fr; /* Better proportion distribution */
-            max-width: 1300px; /* Increased for better space usage */
-            gap: 40px; /* Increased gap for better separation */
-            padding: 25px 50px; /* More horizontal padding */
+        .dropdown-section {
+            padding: 0 25px;
+            margin-bottom: 25px;
         }
 
-        .mega-section {
-            position: relative;
+        .dropdown-section:last-child {
+            margin-bottom: 0;
         }
 
-        .mega-section h3 {
+        .dropdown-section h4 {
             color: var(--navy);
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 20px; /* Restored original spacing */
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            position: relative;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--silver);
         }
 
-        .mega-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--silver);
-        }
-
-        .mega-links {
+        .dropdown-links {
             list-style: none;
         }
 
-        .mega-links li {
-            margin-bottom: 10px; /* Optimized spacing */
+        .dropdown-links li {
+            margin-bottom: 8px;
         }
 
-        .mega-links a {
+        .dropdown-links a {
             color: var(--dark-gray);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
             transition: all 0.3s ease;
             display: block;
-            padding: 8px 0; /* Restored comfortable padding */
+            padding: 6px 0;
             position: relative;
-            padding-left: 18px;
+            padding-left: 15px;
         }
 
-        .mega-links a::before {
+        .dropdown-links a::before {
             content: '▶';
             position: absolute;
             left: 0;
             color: var(--silver);
-            font-size: 10px;
+            font-size: 8px;
             transition: all 0.3s ease;
         }
 
-        .mega-links a:hover {
+        .dropdown-links a:hover {
             color: var(--navy);
-            padding-left: 25px;
+            padding-left: 22px;
         }
 
-        .mega-links a:hover::before {
+        .dropdown-links a:hover::before {
             color: var(--navy);
         }
 
-        /* Featured Section in Mega Menu - IMPROVED */
-        .mega-featured {
-            background: linear-gradient(135deg, var(--light-gray) 0%, #e9ecef 100%);
-            padding: 25px 20px; /* Restored comfortable padding */
-            border-radius: 8px;
-            text-align: center;
-            border: 2px solid var(--silver);
-            min-height: 180px; /* Restored height for better proportion */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .mega-featured h3 {
-            color: var(--navy);
-            margin-bottom: 15px;
-            font-size: 20px; /* Restored size */
-        }
-
-        .mega-featured h3::after {
-            display: none; /* Remove the underline for featured sections */
-        }
-
-        .mega-featured p {
-            color: var(--dark-gray);
-            margin-bottom: 20px; /* Restored spacing */
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .mega-featured .cta-button {
-            background: var(--navy);
-            color: var(--white);
-            padding: 15px 30px; /* Restored original size */
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: inline-block;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 14px;
-        }
-
-        .mega-featured .cta-button:hover {
-            background: var(--hover-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(4, 30, 66, 0.3);
-        }
-
-        /* Attorney Profiles in Mega Menu - IMPROVED */
-        .attorney-grid {
+        /* Attorney Grid in Dropdown */
+        .attorney-dropdown-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Fixed 2 columns for partners */
-            gap: 15px; /* Increased gap for better separation */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 25px;
         }
 
-        .attorney-card {
+        .attorney-dropdown-card {
             background: var(--light-gray);
-            padding: 15px; /* Increased padding for better readability */
+            padding: 15px;
             border-radius: 6px;
             text-align: center;
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
         }
 
-        .attorney-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(4, 30, 66, 0.15);
+        .attorney-dropdown-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(4, 30, 66, 0.1);
         }
 
-        .attorney-card h4 {
+        .attorney-dropdown-card h5 {
             color: var(--navy);
-            margin-bottom: 6px;
-            font-size: 14px;
-            line-height: 1.3;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
-        .attorney-card p {
+        .attorney-dropdown-card p {
             color: var(--dark-gray);
-            font-size: 12px;
+            font-size: 11px;
             margin-bottom: 8px;
         }
 
-        .attorney-card a {
-            color: var(--silver);
+        .attorney-dropdown-card a {
+            color: var(--silver) !important;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-weight: 600;
+            padding-left: 0 !important;
+        }
+
+        .attorney-dropdown-card a::before {
+            display: none !important;
+        }
+
+        .attorney-dropdown-card a:hover {
+            color: var(--navy) !important;
+            padding-left: 0 !important;
+        }
+
+        /* Wide Dropdown for Attorneys */
+        .dropdown.attorneys-dropdown {
+            min-width: 650px;
+            left: -200px;
         }
 
         /* Mobile Menu Toggle */
@@ -359,14 +293,41 @@
             display: none;
             background: none;
             border: none;
-            color: var(--white);
+            color: var(--dark-gray);
             font-size: 24px;
             cursor: pointer;
             padding: 10px;
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .nav-link {
+                padding: 15px 15px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-link {
+                padding: 15px 12px;
+                font-size: 12px;
+            }
+
+            .dropdown.attorneys-dropdown {
+                left: -150px;
+                min-width: 500px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .header-top {
+                padding: 5px 0;
+            }
+
+            .header-top .header-cta {
+                gap: 15px;
+            }
+
             .mobile-toggle {
                 display: block;
             }
@@ -377,38 +338,62 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--navy);
+                background: var(--white);
                 flex-direction: column;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                border-top: 1px solid #e0e0e0;
             }
 
             .main-nav.active {
                 display: flex;
             }
 
-            .mega-menu {
+            .nav-item {
+                width: 100%;
+                margin: 0;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .nav-link {
+                padding: 18px 20px;
+                font-size: 14px;
+                border: none;
+            }
+
+            .dropdown {
                 position: static;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
                 box-shadow: none;
                 background: var(--light-gray);
+                border-top: none;
+                min-width: auto;
             }
 
-            .mega-content {
+            .dropdown.attorneys-dropdown {
+                left: 0;
+                min-width: auto;
+            }
+
+            .attorney-dropdown-grid {
                 grid-template-columns: 1fr;
-                padding: 20px 15px;
-                gap: 20px;
-                max-width: 100%;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 15px;
             }
 
-            .mega-content.attorneys-layout {
-                grid-template-columns: 1fr; /* Stack vertically on mobile */
-                padding: 20px 15px;
+            .header-top .header-cta {
+                flex-direction: column;
+                gap: 8px;
             }
 
-            .attorney-grid {
-                grid-template-columns: 1fr;
+            .logo img {
+                height: 35px;
             }
         }
     </style>
@@ -416,208 +401,161 @@
 <body>
     <header class="header">
         <div class="header-container">
+            <!-- Top Bar -->
             <div class="header-top">
+                <div class="header-cta">
+                    <a href="tel:817-345-6789" class="phone">📞 (817) 345-6789</a>
+                    <a href="/contact-us/" class="cta-button">Request Consultation</a>
+                </div>
+            </div>
+
+            <!-- Main Header -->
+            <div class="header-main">
                 <a href="/" class="logo">
                     <img src="https://i.ibb.co/WWF08fyJ/logo-25-new2-png.png" alt="MBH Fort Worth Family Law" />
                 </a>
-                <div class="header-cta">
-                    <a href="tel:817-345-6789" class="phone">📞 (817) 345-6789</a>
-                    <a href="/contact-us/" class="cta-button">Contact Us</a>
-                </div>
-            </div>
-            
-            <nav class="nav-container">
-                <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
                 
-                <ul class="main-nav" id="mainNav">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Home</a>
-                    </li>
+                <nav>
+                    <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
                     
-                    <li class="nav-item">
-                        <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
-                        <div class="mega-menu">
-                            <div class="mega-content attorneys-layout">
-                                <div class="mega-section">
-                                    <h3>Partners</h3>
-                                    <div class="attorney-grid">
-                                        <div class="attorney-card">
-                                            <h4>Constance Mims</h4>
-                                            <p>Managing Partner</p>
-                                            <a href="/about-our-firm/attorneys/constance-mims/">View Profile</a>
-                                        </div>
-                                        <div class="attorney-card">
-                                            <h4>Bryan Ballew</h4>
-                                            <p>Partner</p>
-                                            <a href="/about-our-firm/attorneys/bryan-ballew/">View Profile</a>
-                                        </div>
-                                        <div class="attorney-card">
-                                            <h4>Matt Riek</h4>
-                                            <p>Partner</p>
-                                            <a href="/about-our-firm/attorneys/matt-riek/">View Profile</a>
-                                        </div>
-                                        <div class="attorney-card">
-                                            <h4>Kelly Hollingsworth</h4>
-                                            <p>Partner</p>
-                                            <a href="/about-our-firm/attorneys/kelly-hollingsworth/">View Profile</a>
-                                        </div>
-                                        <div class="attorney-card">
-                                            <h4>Tim Alexander</h4>
-                                            <p>Partner</p>
-                                            <a href="/about-our-firm/attorneys/tim-alexander/">View Profile</a>
-                                        </div>
-                                        <div class="attorney-card">
-                                            <h4>Andrew McAlester</h4>
-                                            <p>Partner</p>
-                                            <a href="/about-our-firm/attorneys/andrew-mcalester/">View Profile</a>
+                    <ul class="main-nav" id="mainNav">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
+                            <div class="dropdown attorneys-dropdown">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-section">
+                                        <h4>Partners</h4>
+                                        <div class="attorney-dropdown-grid">
+                                            <div class="attorney-dropdown-card">
+                                                <h5>Constance Mims</h5>
+                                                <p>Managing Partner</p>
+                                                <a href="/about-our-firm/attorneys/constance-mims/">View Profile</a>
+                                            </div>
+                                            <div class="attorney-dropdown-card">
+                                                <h5>Bryan Ballew</h5>
+                                                <p>Partner</p>
+                                                <a href="/about-our-firm/attorneys/bryan-ballew/">View Profile</a>
+                                            </div>
+                                            <div class="attorney-dropdown-card">
+                                                <h5>Matt Riek</h5>
+                                                <p>Partner</p>
+                                                <a href="/about-our-firm/attorneys/matt-riek/">View Profile</a>
+                                            </div>
+                                            <div class="attorney-dropdown-card">
+                                                <h5>Kelly Hollingsworth</h5>
+                                                <p>Partner</p>
+                                                <a href="/about-our-firm/attorneys/kelly-hollingsworth/">View Profile</a>
+                                            </div>
+                                            <div class="attorney-dropdown-card">
+                                                <h5>Tim Alexander</h5>
+                                                <p>Partner</p>
+                                                <a href="/about-our-firm/attorneys/tim-alexander/">View Profile</a>
+                                            </div>
+                                            <div class="attorney-dropdown-card">
+                                                <h5>Andrew McAlester</h5>
+                                                <p>Partner</p>
+                                                <a href="/about-our-firm/attorneys/andrew-mcalester/">View Profile</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="mega-section">
-                                    <h3>Attorneys</h3>
-                                    <ul class="mega-links">
-                                        <li><a href="/about-our-firm/attorneys/alexis-gebhardt/">Alexis Gebhardt</a></li>
-                                        <li><a href="/about-our-firm/attorneys/allison-luttrell/">Allison H. Luttrell</a></li>
-                                        <li><a href="/about-our-firm/attorneys/madison-l-easterlin/">Madison L. Easterlin</a></li>
-                                        <li><a href="/about-our-firm/attorneys/haley-m-shaw/">Haley M. Shaw</a></li>
-                                        <li><a href="/about-our-firm/attorneys/jessica-alvarez/">Jessica Alvarez</a></li>
-                                        <li><a href="/about-our-firm/attorneys/rayasia-asia-alexis-myles/">Rayasia "Asia" Alexis Myles</a></li>
-                                        <li><a href="/about-our-firm/attorneys/brian-alpiger/">Brian Alpiger</a></li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="mega-featured">
-                                    <h3>Meet Our Team</h3>
-                                    <p>Our experienced attorneys combine decades of legal expertise with personalized attention to achieve the best outcomes for our clients.</p>
-                                    <a href="/about-our-firm/attorneys/" class="cta-button">View All Attorneys</a>
+                                    
+                                    <div class="dropdown-section">
+                                        <h4>Associate Attorneys</h4>
+                                        <ul class="dropdown-links">
+                                            <li><a href="/about-our-firm/attorneys/alexis-gebhardt/">Alexis Gebhardt</a></li>
+                                            <li><a href="/about-our-firm/attorneys/allison-luttrell/">Allison H. Luttrell</a></li>
+                                            <li><a href="/about-our-firm/attorneys/madison-l-easterlin/">Madison L. Easterlin</a></li>
+                                            <li><a href="/about-our-firm/attorneys/haley-m-shaw/">Haley M. Shaw</a></li>
+                                            <li><a href="/about-our-firm/attorneys/jessica-alvarez/">Jessica Alvarez</a></li>
+                                            <li><a href="/about-our-firm/attorneys/rayasia-asia-alexis-myles/">Rayasia "Asia" Alexis Myles</a></li>
+                                            <li><a href="/about-our-firm/attorneys/brian-alpiger/">Brian Alpiger</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/practice-areas/" class="nav-link">Family Law</a>
-                        <div class="mega-menu">
-                            <div class="mega-content">
-                                <div class="mega-section">
-                                    <h3>Family Law Services</h3>
-                                    <ul class="mega-links">
-                                        <li><a href="/fort-worth-divorce-lawyer/">Divorce</a></li>
-                                        <li><a href="/fort-worth-child-support-attorney/">Child Support</a></li>
-                                        <li><a href="/fort-worth-child-custody-attorney/">Child Custody</a></li>
-                                        <li><a href="/fort-worth-property-division-attorney/">Property Division</a></li>
-                                        <li><a href="/fort-worth-high-net-worth-divorce-lawyer/">High Net Worth Divorce</a></li>
-                                        <li><a href="/mediation-attorney/">Mediation</a></li>
-                                        <li><a href="/fort-worth-prenuptial-agreements-attorney/">Prenuptial Agreements</a></li>
-                                        <li><a href="/fort-worth-postnuptial-agreements-attorney/">Postnuptial Agreements</a></li>
-                                        <li><a href="/fort-worth-appeals-attorney/">Appeals</a></li>
-                                        <li><a href="/mediation-attorney/">Collaborative Law</a></li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="mega-featured">
-                                    <h3>Need Help Today?</h3>
-                                    <p>Get expert legal advice for your family law matter. Our experienced attorneys are ready to guide you through this challenging time.</p>
-                                    <a href="/contact-us/" class="cta-button">Schedule Consultation</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/practice-areas/" class="nav-link">Family Law Services</a>
+                            <div class="dropdown">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-section">
+                                        <h4>Family Law Services</h4>
+                                        <ul class="dropdown-links">
+                                            <li><a href="/fort-worth-divorce-lawyer/">Divorce</a></li>
+                                            <li><a href="/fort-worth-child-support-attorney/">Child Support</a></li>
+                                            <li><a href="/fort-worth-child-custody-attorney/">Child Custody</a></li>
+                                            <li><a href="/fort-worth-property-division-attorney/">Property Division</a></li>
+                                            <li><a href="/fort-worth-high-net-worth-divorce-lawyer/">High Net Worth Divorce</a></li>
+                                            <li><a href="/mediation-attorney/">Mediation</a></li>
+                                            <li><a href="/fort-worth-prenuptial-agreements-attorney/">Prenuptial Agreements</a></li>
+                                            <li><a href="/fort-worth-postnuptial-agreements-attorney/">Postnuptial Agreements</a></li>
+                                            <li><a href="/fort-worth-appeals-attorney/">Appeals</a></li>
+                                            <li><a href="/mediation-attorney/">Collaborative Law</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
-                        <div class="mega-menu">
-                            <div class="mega-content">
-                                <div class="mega-section">
-                                    <h3>Business Law Services</h3>
-                                    <ul class="mega-links">
-                                        <li><a href="/texas-business-litigation-attorney/">Business Litigation</a></li>
-                                        <li><a href="/texas-business-litigation-attorney/">Contract Dispute</a></li>
-                                        <li><a href="/texas-business-litigation-attorney/">Outside General Counsel</a></li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="mega-featured">
-                                    <h3>Protect Your Business</h3>
-                                    <p>Don't let legal issues threaten your business. Our corporate attorneys provide strategic counsel to keep your business moving forward.</p>
-                                    <a href="/contact-us/" class="cta-button">Get Legal Counsel</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
+                            <div class="dropdown">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-section">
+                                        <h4>Business Law Services</h4>
+                                        <ul class="dropdown-links">
+                                            <li><a href="/texas-business-litigation-attorney/">Business Litigation</a></li>
+                                            <li><a href="/texas-business-litigation-attorney/">Contract Disputes</a></li>
+                                            <li><a href="/texas-business-litigation-attorney/">Outside General Counsel</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/about-our-firm/" class="nav-link">About</a>
-                        <div class="mega-menu">
-                            <div class="mega-content">
-                                <div class="mega-section">
-                                    <h3>About Our Firm</h3>
-                                    <ul class="mega-links">
-                                        <li><a href="/about-our-firm/">Awards & Accolades</a></li>
-                                        <li><a href="/about-our-firm/">Careers</a></li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="mega-featured">
-                                    <h3>Why Choose MBH?</h3>
-                                    <p>With over 50 years of combined experience, we provide aggressive representation and compassionate counsel when you need it most.</p>
-                                    <a href="/about-our-firm/" class="cta-button">Learn More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/blog/" class="nav-link">News & Resources</a>
-                        <div class="mega-menu">
-                            <div class="mega-content">
-                                <div class="mega-content">
-                                    <div class="mega-section">
-                                        <h3>Client Resources</h3>
-                                        <ul class="mega-links">
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/blog/" class="nav-link">News & Insights</a>
+                            <div class="dropdown">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-section">
+                                        <h4>Client Resources</h4>
+                                        <ul class="dropdown-links">
                                             <li><a href="/blog/">Blog</a></li>
                                             <li><a href="/faqs/">FAQs</a></li>
                                             <li><a href="/testimonials/">Testimonials</a></li>
                                         </ul>
                                     </div>
-                                    
-                                    <div class="mega-featured">
-                                        <h3>Stay Informed</h3>
-                                        <p>Access our latest legal insights, frequently asked questions, and client success stories to help guide your legal decisions.</p>
-                                        <a href="/blog/" class="cta-button">Read More</a>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/about-our-firm/" class="nav-link">About</a>
+                            <div class="dropdown">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-section">
+                                        <h4>About Our Firm</h4>
+                                        <ul class="dropdown-links">
+                                            <li><a href="/about-our-firm/">Our Story</a></li>
+                                            <li><a href="/about-our-firm/">Awards & Accolades</a></li>
+                                            <li><a href="/about-our-firm/">Careers</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/contact-us/" class="nav-link">Locations</a>
-                        <div class="mega-menu">
-                            <div class="mega-content">
-                                <div class="mega-section">
-                                    <h3>Our Offices</h3>
-                                    <ul class="mega-links">
-                                        <li><a href="/fort-worth-divorce-lawyer/">Fort Worth</a></li>
-                                        <li><a href="/southlake-family-law-attorney/">Southlake</a></li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="mega-featured">
-                                    <h3>Visit Us Today</h3>
-                                    <p>Conveniently located to serve clients throughout the Dallas-Fort Worth metroplex. Schedule your consultation at either location.</p>
-                                    <a href="/contact-us/" class="cta-button">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="/contact-us/" class="nav-link">Contact</a>
-                    </li>
-                </ul>
-            </nav>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/contact-us/" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
