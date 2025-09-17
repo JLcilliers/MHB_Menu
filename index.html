@@ -90,7 +90,7 @@
             transform: translateY(-1px);
         }
 
-        /* Main Header - Proper layout: logo left, menu block pushed right */
+        /* Main Header - Logo left, full-width nav */
         .header-main {
             display: flex;
             align-items: center;
@@ -102,34 +102,34 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-            flex-shrink: 0;  /* Prevents logo from shrinking */
-            margin-right: 20px;  /* Small space after logo */
+            flex-shrink: 0;
+            margin-right: 20px;
         }
 
         .logo img {
-            height: 60px;  /* Made logo bigger */
+            height: 60px;
             width: auto;
-            max-width: 350px;  /* Increased max-width for bigger logo */
+            max-width: 350px;
             object-fit: contain;
         }
 
-        /* Navigation - Push entire menu block to far right, then spread items within */
+        /* Navigation - Full width with equal nav items */
         .main-nav {
-            margin-left: auto;  /* KEY: Pushes entire menu block to far right */
             display: flex;
             align-items: center;
             list-style: none;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin: 0;
             padding: 0;
-            /* Spread items evenly within the menu block */
-            justify-content: space-evenly;
-            width: auto;  /* Allow menu to size based on content */
+            /* Take up all remaining width */
+            flex: 1;
+            /* Remove justify-content to let flex items control their own spacing */
         }
 
         .nav-item {
             position: relative;
             margin: 0;
+            /* KEY: Each nav item takes equal width - this is what was missing! */
+            flex: 1;
         }
 
         .nav-link {
@@ -143,6 +143,8 @@
             letter-spacing: 0.8px;
             transition: all 0.3s ease;
             position: relative;
+            /* Center text within each equal-width section */
+            text-align: center;
         }
 
         .nav-link:hover {
