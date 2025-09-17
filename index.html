@@ -90,10 +90,9 @@
             transform: translateY(-1px);
         }
 
-        /* Main Header - Updated for far right positioning */
+        /* Main Header - Updated for full width spread */
         .header-main {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 15px 0;
             width: 100%;
@@ -103,8 +102,9 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-            /* Ensure logo stays on far left */
-            margin-right: auto;
+            /* Keep logo on far left */
+            margin-right: 30px;
+            flex-shrink: 0;
         }
 
         .logo img {
@@ -114,22 +114,21 @@
             object-fit: contain;
         }
 
-        /* Navigation - Pushed to far right */
+        /* Navigation - Spread across remaining width */
         .main-nav {
             display: flex;
             align-items: center;
             list-style: none;
             margin: 0;
             padding: 0;
-            /* Remove margin-left: auto since we're using space-between */
-            /* Push navigation to the absolute far right */
-            margin-left: auto;
-            padding-right: 0;
+            /* Take up remaining space and spread items */
+            flex: 1;
+            justify-content: space-between;
         }
 
         .nav-item {
             position: relative;
-            margin: 0 5px;
+            margin: 0;
         }
 
         .nav-link {
@@ -289,11 +288,12 @@
             padding-left: 0 !important;
         }
 
-        /* Wide Dropdown for Attorneys - Adjusted positioning for far right */
+        /* Wide Dropdown for Attorneys - Adjusted for spread layout */
         .dropdown.attorneys-dropdown {
             min-width: 650px;
-            /* Adjust left positioning to prevent overflow when nav is far right */
-            left: -400px;
+            /* Center the dropdown relative to the nav item */
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         /* Mobile Menu Toggle */
@@ -315,7 +315,9 @@
             }
             
             .dropdown.attorneys-dropdown {
-                left: -300px;
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 550px;
             }
         }
 
@@ -326,7 +328,8 @@
             }
 
             .dropdown.attorneys-dropdown {
-                left: -200px;
+                left: 50%;
+                transform: translateX(-50%);
                 min-width: 500px;
             }
         }
@@ -390,6 +393,7 @@
 
             .dropdown.attorneys-dropdown {
                 left: 0;
+                transform: none;
                 min-width: auto;
             }
 
@@ -433,7 +437,7 @@
             <!-- Main Header -->
             <div class="header-main">
                 <a href="/" class="logo">
-                    <img src="https://i.ibb.co/VfJKpSd/Gemini-Generated-Image-dt6vv8dt6vv8dt6v.png" alt="MBH Fort Worth Family Law" />
+                    <img src="https://i.ibb.co/KtCHhJr/Untitled-design.png" alt="MBH Fort Worth Family Law" />
                 </a>
                 
                 <nav>
