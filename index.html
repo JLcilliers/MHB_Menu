@@ -16,7 +16,7 @@
       --white:#FFFFFF;
       --hover-blue:#1a4a72;
       --title-blue:#00007C;   /* main item colour */
-      --desc-blue:#2E59D7;    /* description colour */
+      --desc-blue:#BEBEBE;    /* description colour - updated */
     }
 
     .header{background:var(--white);box-shadow:0 2px 10px rgba(4,30,66,.1);position:relative;z-index:1000}
@@ -42,11 +42,11 @@
     .nav-link{display:block;padding:15px 20px;color:var(--dark-gray);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.8px;transition:.3s}
     .nav-link:hover{color:var(--navy)}
 
-    /* Dropdown panel - JS toggles .show and positions it; default hidden */
+    /* Dropdown panel - positioned by JS and clamped to viewport */
     .dropdown{
-      position:fixed;            /* fixed to viewport so we can clamp safely */
-      top:0; left:0;             /* actual coordinates are set by JS */
-      max-width:min(92vw, 1000px);
+      position:fixed;           /* viewport anchored */
+      top:0; left:0;
+      max-width:min(96vw, 1100px);
       background:var(--white);
       box-shadow:0 8px 25px rgba(4,30,66,.15);
       border-top:3px solid var(--navy);
@@ -57,28 +57,59 @@
     }
     .dropdown.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
 
-    /* Horizontal content row */
+    /* Horizontal content - wraps to new rows, no scroll bars */
     .dropdown-row{
-      display:flex;flex-wrap:nowrap;gap:28px;align-items:stretch;
-      padding:20px 24px;overflow-x:auto;scrollbar-width:thin
+      display:flex;
+      flex-wrap:wrap;            /* wrap instead of scrolling */
+      gap:24px;
+      align-items:stretch;
+      padding:20px 24px;
+      overflow:visible;          /* ensure no scroll bar appears */
     }
-    .dropdown-row::-webkit-scrollbar{height:8px}
-    .dropdown-row::-webkit-scrollbar-thumb{background:#d4d7da;border-radius:8px}
 
-    /* Two-line link cards - no underlines anywhere inside */
-    .drop-card{flex:0 0 220px;background:var(--white);border:1px solid #e7e7e7;border-radius:8px;padding:14px;transition:.25s;display:flex;flex-direction:column;gap:6px;text-decoration:none}
+    /* Two-line link cards - no underlines */
+    .drop-card{
+      flex:1 1 220px;            /* grows, minimum width 220 */
+      max-width:260px;
+      background:var(--white);
+      border:1px solid #e7e7e7;
+      border-radius:8px;
+      padding:14px;
+      transition:.25s;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      text-decoration:none;
+    }
     .drop-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(4,30,66,.12)}
     .drop-card *{text-decoration:none}
     .drop-title{color:var(--title-blue);font-weight:700;font-size:14px;line-height:1.25;text-transform:none;letter-spacing:.2px}
     .drop-desc{color:var(--desc-blue);font-size:12.5px;line-height:1.35}
 
-    /* Attorneys horizontal */
-    .attorney-row{display:flex;gap:20px;padding:20px 24px;overflow-x:auto;scrollbar-width:thin}
-    .attorney-card{flex:0 0 200px;background:var(--light-gray);padding:14px;border-radius:8px;text-align:center;transition:.25s;border:1px solid #e0e0e0;text-decoration:none}
+    /* Attorneys layout - wrap, no scroll bars */
+    .attorney-row{
+      display:flex;
+      flex-wrap:wrap;            /* wrap instead of scrolling */
+      gap:20px;
+      padding:20px 24px;
+      overflow:visible;
+    }
+    .attorney-card{
+      flex:1 1 220px;
+      max-width:260px;
+      background:var(--light-gray);
+      padding:14px;
+      border-radius:8px;
+      text-align:center;
+      transition:.25s;
+      border:1px solid #e0e0e0;
+      text-decoration:none;
+    }
     .attorney-card:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(4,30,66,.1)}
     .attorney-card h5{color:var(--title-blue);margin-bottom:4px;font-size:13px;font-weight:700}
     .attorney-card p{color:var(--dark-gray);font-size:11.5px;margin-bottom:8px}
-    .attorney-card a{color:var(--desc-blue);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;text-decoration:none}
+    .attorney-card a,
+    .attorney-card span{color:#2E59D7;font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;text-decoration:none}
 
     .mobile-toggle{display:none;background:none;border:none;color:var(--dark-gray);font-size:24px;cursor:pointer;padding:10px}
 
@@ -99,19 +130,16 @@
       .nav-item{width:100%;margin:0;border-bottom:1px solid #e0e0e0}
       .nav-link{padding:18px 20px;font-size:14px;border:none}
 
-      /* Mobile - dropdowns stack rather than horizontal scroll */
+      /* Mobile - stacked blocks */
       .dropdown{position:static;max-width:none;box-shadow:none;border-top:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}
-      .dropdown-row{flex-wrap:wrap;gap:16px;overflow-x:visible;padding:16px}
-      .drop-card{flex:1 1 calc(50% - 16px)}
-      .attorney-row{gap:16px;padding:16px;overflow-x:visible;flex-wrap:wrap}
-      .attorney-card{flex:1 1 calc(50% - 16px)}
+      .drop-card,.attorney-card{flex:1 1 100%;max-width:none}
+      .dropdown-row,.attorney-row{gap:16px;padding:16px}
     }
     @media (max-width:480px){
       .header-container{padding:0 15px}
       .header-top{padding:5px 15px}
       .header-top .header-cta{flex-direction:column;gap:8px}
       .logo img{height:35px}
-      .drop-card,.attorney-card{flex:1 1 100%}
     }
   </style>
 </head>
@@ -142,22 +170,22 @@
             <div class="dropdown" id="drop-attorneys" role="menu" aria-hidden="true">
               <div class="attorney-row">
                 <a class="attorney-card" href="/about-our-firm/attorneys/constance-mims/">
-                  <h5>Constance Mims</h5><p>Managing Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                  <h5>Constance Mims</h5><p>Managing Partner</p><span>View Profile</span>
                 </a>
                 <a class="attorney-card" href="/about-our-firm/attorneys/bryan-ballew/">
-                  <h5>Bryan Ballew</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                  <h5>Bryan Ballew</h5><p>Partner</p><span>View Profile</span>
                 </a>
                 <a class="attorney-card" href="/about-our-firm/attorneys/matt-riek/">
-                  <h5>Matt Riek</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                  <h5>Matt Riek</h5><p>Partner</p><span>View Profile</span>
                 </a>
                 <a class="attorney-card" href="/about-our-firm/attorneys/kelly-hollingsworth/">
-                  <h5>Kelly Hollingsworth</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                  <h5>Kelly Hollingsworth</h5><p>Partner</p><span>View Profile</span>
                 </a>
                 <a class="attorney-card" href="/about-our-firm/attorneys/tim-alexander/">
-                  <h5>Tim Alexander</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                  <h5>Tim Alexander</h5><p>Partner</p><span>View Profile</span>
                 </a>
                 <a class="attorney-card" href="/about-our-firm/attorneys/andrew-mcalester/">
-                  <h5>Andrew McAlester</h5><p>Partner</p><span style="color:var(--desc-blue);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px">View Profile</span>
+                  <h5>Andrew McAlester</h5><p>Partner</p><span>View Profile</span>
                 </a>
               </div>
             </div>
@@ -296,7 +324,6 @@
     const panel = item.querySelector('.dropdown');
     if(!panel) return;
 
-    // open and position on hover or focus
     const open = () => {
       panel.classList.add('show');
       positionPanel(item, panel);
@@ -305,7 +332,6 @@
 
     item.addEventListener('mouseenter', open);
     item.addEventListener('mouseleave', (e)=>{
-      // if moving into panel, keep open
       if(!panel.contains(e.relatedTarget)) close();
     });
     item.addEventListener('focusin', open);
@@ -317,27 +343,31 @@
   });
 
   function positionPanel(item, panel){
-    // Reset inline styles first
+    // Reset to get natural size after wrapping
     panel.style.left = '0px';
     panel.style.top = '0px';
 
     const itemRect = item.getBoundingClientRect();
+
+    // Temporarily make visible to measure if not already
+    const wasHidden = !panel.classList.contains('show');
+    if(wasHidden){ panel.classList.add('show'); }
+
     const panelRect = panel.getBoundingClientRect();
 
-    // Desired centred x based on the triggering item
+    // Centre on trigger, then clamp within viewport
     let left = itemRect.left + itemRect.width/2 - panelRect.width/2;
-
-    // Clamp within viewport with a small margin
     left = Math.max(SAFE_MARGIN, Math.min(left, window.innerWidth - panelRect.width - SAFE_MARGIN));
 
-    // Just below the item
     const top = itemRect.bottom + window.scrollY;
 
     panel.style.left = `${left}px`;
     panel.style.top  = `${top}px`;
+
+    if(wasHidden){ panel.classList.remove('show'); }
   }
 
-  // Close mobile menu if clicking outside
+  // Close mobile menu on outside click
   document.addEventListener('click',function(e){
     const nav=document.getElementById('mainNav');
     const toggle=document.querySelector('.mobile-toggle');
