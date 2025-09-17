@@ -46,8 +46,8 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            padding: 8px 0;
-            background: var(--light-gray);
+            padding: 8px 30px;
+            background: #BEBEBE;
             font-size: 14px;
             border-bottom: 1px solid #e0e0e0;
         }
@@ -73,7 +73,7 @@
         }
 
         .header-top .cta-button {
-            background: var(--navy);
+            background: #2E59D7;
             color: var(--white);
             padding: 8px 20px;
             border-radius: 4px;
@@ -86,7 +86,7 @@
         }
 
         .header-top .cta-button:hover {
-            background: var(--hover-blue);
+            background: #1a4a72;
             transform: translateY(-1px);
         }
 
@@ -178,7 +178,7 @@
         }
 
         .dropdown-section h4 {
-            color: var(--navy);
+            color: #00007C;
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
@@ -387,6 +387,10 @@
                 padding: 0 15px;
             }
 
+            .header-top {
+                padding: 5px 15px;
+            }
+
             .header-top .header-cta {
                 flex-direction: column;
                 gap: 8px;
@@ -400,15 +404,15 @@
 </head>
 <body>
     <header class="header">
-        <div class="header-container">
-            <!-- Top Bar -->
-            <div class="header-top">
-                <div class="header-cta">
-                    <a href="tel:817-345-6789" class="phone">📞 (817) 345-6789</a>
-                    <a href="/contact-us/" class="cta-button">Request Consultation</a>
-                </div>
+        <!-- Top Bar -->
+        <div class="header-top">
+            <div class="header-cta">
+                <a href="tel:817-345-6789" class="phone">📞 (817) 345-6789</a>
+                <a href="/contact-us/" class="cta-button">Request Consultation</a>
             </div>
+        </div>
 
+        <div class="header-container">
             <!-- Main Header -->
             <div class="header-main">
                 <a href="/" class="logo">
