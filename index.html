@@ -1,220 +1,545 @@
-Got it - I’ve removed the phone icon, widened and spaced the main nav so items sit more horizontally, made each mega menu full width across the viewport, and increased the vertical spacing between rows in Family Law so it is less cramped. I also kept everything in sans serif.
-
-Here is a drop-in replacement that implements your manager’s notes and mirrors the KoonsFuller style while using your Excel topics and subtopics.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MBH Texas - Professional Header</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;background:#f8f9fa;line-height:1.6}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBH Texas - Modern Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root{
-      --navy:#041E42;
-      --silver:#869397;
-      --dark-gray:#4F4F4F;
-      --light-gray:#F5F5F5;
-      --white:#FFFFFF;
-      --title-blue:#00007C;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
 
-    .header{background:var(--white);box-shadow:0 2px 10px rgba(4,30,66,.1);position:relative;z-index:1000}
-    .header-container{max-width:1320px;margin:0 auto;padding:0 24px}
+        :root {
+            --navy: #041E42;
+            --white: #FFFFFF;
+            --black: #000000;
+            --light-gray: #f5f5f5;
+        }
 
-    /* Top bar - no phone icon */
-    .header-top{display:flex;justify-content:flex-end;align-items:center;padding:8px 24px;background:#BEBEBE;font-size:14px;border-bottom:1px solid #e0e0e0}
-    .header-top .header-cta{display:flex;align-items:center;gap:28px}
-    .header-top .phone{color:var(--dark-gray);font-size:14px;font-weight:600;text-decoration:none}
-    .header-top .phone:hover{color:var(--navy)}
-    .header-top .cta-button{background:#2E59D7;color:var(--white);padding:8px 18px;border-radius:4px;text-decoration:none;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.4px;transition:.2s}
-    .header-top .cta-button:hover{filter:brightness(.95)}
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 1000;
+        }
 
-    /* Main header */
-    .header-main{display:flex;align-items:center;width:100%;padding:16px 0}
-    .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
-    .logo img{height:58px;width:auto;max-width:340px;object-fit:contain}
-    nav{flex:1} /* allow nav to stretch so items spread out horizontally */
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
-    .main-nav{display:flex;align-items:center;list-style:none;margin:0;padding:0;gap:30px;justify-content:space-between}
-    .nav-item{position:relative}
-    .nav-link{display:block;padding:14px 8px;color:var(--dark-gray);text-decoration:none;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.8px;transition:.2s}
-    .nav-link:hover{color:var(--navy)}
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
 
-    /* Full-width dropdown panel */
-    .dropdown{
-      position:fixed; left:0; width:100vw;
-      background:var(--white);
-      box-shadow:0 18px 35px rgba(4,30,66,.15);
-      border-top:3px solid var(--navy);
-      opacity:0; visibility:hidden; pointer-events:none;
-      transition:opacity .18s ease, transform .18s ease;
-      transform:translateY(-6px);
-      z-index:999;
-    }
-    .dropdown.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
-    .dropdown-inner{max-width:1320px;margin:0 auto;padding:22px 24px}
-    .dropdown a{text-decoration:none}
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
 
-    /* Attorneys - two columns across */
-    .section-row{display:flex;gap:48px;align-items:flex-start;flex-wrap:nowrap}
-    .section{flex:1 1 50%;min-width:280px}
-    .section h4{
-      color:var(--title-blue);font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;
-      margin-bottom:10px;border-bottom:2px solid var(--silver);padding-bottom:6px;
-    }
-    .section ul{list-style:none}
-    .section li{margin:8px 0}
-    .section a{color:var(--dark-gray);font-size:14px;font-weight:600}
-    .section a:hover{color:var(--navy)}
+        .logo img {
+            height: 40px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+        }
 
-    /* Generic link grid for mega menus */
-    .link-grid{display:flex;flex-wrap:wrap;gap:18px 36px;align-items:flex-start}
-    .link-item{flex:0 1 calc(25% - 36px)} /* four columns across on wide screens */
-    .link-title{display:block;color:var(--title-blue);font-weight:900;font-size:16px;line-height:1.25;margin-bottom:4px}
-    .link-desc{display:block;color:var(--dark-gray);font-size:14px;line-height:1.35}
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
 
-    /* Family Law - extra vertical spacing as requested */
-    #drop-fls .link-grid{row-gap:22px} /* slightly looser for readability */
+        .phone {
+            color: var(--black);
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
 
-    .mobile-toggle{display:none;background:none;border:none;color:var(--dark-gray);font-size:28px;cursor:pointer;padding:10px}
+        .cta-button {
+            background: var(--navy);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
 
-    @media (max-width:1200px){
-      .main-nav{gap:22px}
-      .link-item{flex:0 1 calc(33.333% - 36px)}
-    }
-    @media (max-width:992px){
-      .link-item{flex:0 1 calc(50% - 36px)}
-    }
-    @media (max-width:768px){
-      .header-container{padding:0 20px}
-      .header-top{padding:6px 20px}
-      .mobile-toggle{display:block}
+        .cta-button:hover {
+            background: #1a4a72;
+        }
 
-      .main-nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);flex-direction:column;box-shadow:0 12px 24px rgba(0,0,0,.1);border-top:1px solid #e0e0e0;padding:8px 0}
-      .main-nav.active{display:flex}
-      .nav-item{width:100%;border-bottom:1px solid #eee}
-      .nav-link{padding:16px 20px;font-size:15px}
+        /* Navigation */
+        .nav-container {
+            position: relative;
+        }
 
-      /* Mobile dropdowns become inline blocks */
-      .dropdown{position:static;width:100%;box-shadow:none;border-top:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}
-      .dropdown-inner{max-width:none;padding:16px 20px}
-      .section{flex:1 1 100%}
-      .link-item{flex:1 1 100%}
-    }
-  </style>
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 22px 28px;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--navy);
+        }
+
+        /* Mega Menu Overlay */
+        .mega-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 998;
+            overflow-y: auto;
+            padding-top: 140px;
+        }
+
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mega-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            display: flex;
+            align-items: flex-start;
+            gap: 80px;
+        }
+
+        /* Menu Title on Left */
+        .mega-title {
+            color: var(--white);
+            font-size: 42px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            min-width: 280px;
+            flex-shrink: 0;
+        }
+
+        /* Menu Items Spread Horizontally */
+        .mega-items {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: flex-start;
+        }
+
+        .mega-items-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .mega-section-title {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .mega-items ul {
+            list-style: none;
+        }
+
+        .mega-items li {
+            margin-bottom: 16px;
+        }
+
+        .mega-items a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .mega-items a:hover {
+            opacity: 0.7;
+            transform: translateX(5px);
+        }
+
+        /* Special styling for sections with descriptions */
+        .mega-item-with-desc {
+            margin-bottom: 35px;
+        }
+
+        .mega-item-with-desc h3 {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .mega-item-with-desc p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .mega-item-with-desc a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .mega-item-with-desc a:hover {
+            opacity: 0.8;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--black);
+            font-size: 28px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .mega-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .mega-title {
+                font-size: 32px;
+                min-width: auto;
+            }
+
+            .mega-items {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .header-container {
+                padding: 0 20px;
+            }
+
+            .phone {
+                font-size: 14px;
+            }
+
+            .cta-button {
+                padding: 10px 18px;
+                font-size: 11px;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                border-top: 1px solid #e5e5e5;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 18px 20px;
+                border-bottom: 1px solid #e5e5e5;
+            }
+
+            .mega-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                background: rgba(0, 0, 0, 0.95);
+                padding-top: 20px;
+            }
+
+            .mega-content {
+                padding: 30px 20px;
+            }
+
+            .mega-title {
+                font-size: 24px;
+            }
+
+            .mega-items a {
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-<header class="header" id="siteHeader">
-  <div class="header-top">
-    <div class="header-cta">
-      <!-- phone icon removed - plain tel link retained -->
-      <a href="tel:817-345-6789" class="phone">(817) 345-6789</a>
-      <a href="/contact-us/" class="cta-button">Request Consultation</a>
-    </div>
-  </div>
-
-  <div class="header-container">
-    <div class="header-main">
-      <a href="/" class="logo">
-        <img src="https://i.ibb.co/KtCHhJr/Untitled-design.png" alt="MBH Fort Worth Family Law"/>
-      </a>
-
-      <nav>
-        <button class="mobile-toggle" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
-        <ul class="main-nav" id="mainNav">
-          <!-- ATTORNEYS -->
-          <li class="nav-item" data-drop="attorneys">
-            <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
-            <div class="dropdown" id="drop-attorneys" role="menu" aria-hidden="true">
-              <div class="dropdown-inner">
-                <div class="section-row">
-                  <div class="section">
-                    <h4>Partners</h4>
-                    <ul>
-                      <li><a href="/about-our-firm/attorneys/constance-mims/">Constance Mims</a></li>
-                      <li><a href="/about-our-firm/attorneys/bryan-ballew/">Bryan Ballew</a></li>
-                      <li><a href="/about-our-firm/attorneys/matt-riek/">Matt Riek</a></li>
-                      <li><a href="/about-our-firm/attorneys/kelly-hollingsworth/">Kelly Hollingsworth</a></li>
-                      <li><a href="/about-our-firm/attorneys/tim-alexander/">Tim Alexander</a></li>
-                      <li><a href="/about-our-firm/attorneys/andrew-mcalester/">Andrew McAlester</a></li>
-                    </ul>
-                  </div>
-                  <div class="section">
-                    <h4>Attorneys</h4>
-                    <ul>
-                      <li><a href="/about-our-firm/attorneys/alexis-gebhardt/">Alexis Gebhardt</a></li>
-                      <li><a href="/about-our-firm/attorneys/allison-luttrell/">Allison H. Luttrell</a></li>
-                      <li><a href="/about-our-firm/attorneys/madison-l-easterlin/">Madison L. Easterlin</a></li>
-                      <li><a href="/about-our-firm/attorneys/haley-m-shaw/">Haley M. Shaw</a></li>
-                      <li><a href="/about-our-firm/attorneys/jessica-alvarez/">Jessica Alvarez</a></li>
-                      <li><a href="/about-our-firm/attorneys/rayasia-asia-alexis-myles/">Rayasia "Asia" Alexis Myles</a></li>
-                      <li><a href="/about-our-firm/attorneys/brian-alpiger/">Brian Alpiger</a></li>
-                    </ul>
-                  </div>
+    <header class="header">
+        <div class="header-container">
+            <div class="header-top">
+                <a href="/" class="logo">
+                    <img src="https://i.ibb.co/WWF08fyJ/logo-25-new2-png.png" alt="MBH Fort Worth Family Law" />
+                </a>
+                <div class="header-cta">
+                    <a href="tel:817-345-6789" class="phone">(817) 345-6789</a>
+                    <a href="/contact-us/" class="cta-button">Free Consultation</a>
                 </div>
-              </div>
             </div>
-          </li>
+            
+            <nav class="nav-container">
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+                
+                <ul class="main-nav" id="mainNav">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
+                        <div class="mega-menu">
+                            <div class="mega-content">
+                                <div class="mega-title">Attorneys</div>
+                                <div class="mega-items">
+                                    <div class="mega-items-column">
+                                        <div class="mega-section-title">Partners</div>
+                                        <ul>
+                                            <li><a href="/about-our-firm/attorneys/constance-mims/">Constance Mims</a></li>
+                                            <li><a href="/about-our-firm/attorneys/bryan-ballew/">Bryan Ballew</a></li>
+                                            <li><a href="/about-our-firm/attorneys/matt-riek/">Matt Riek</a></li>
+                                            <li><a href="/about-our-firm/attorneys/kelly-hollingsworth/">Kelly Hollingsworth</a></li>
+                                            <li><a href="/about-our-firm/attorneys/tim-alexander/">Tim Alexander</a></li>
+                                            <li><a href="/about-our-firm/attorneys/andrew-mcalester/">Andrew McAlester</a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="mega-items-column">
+                                        <div class="mega-section-title">Attorneys</div>
+                                        <ul>
+                                            <li><a href="/about-our-firm/attorneys/alexis-gebhardt/">Alexis Gebhardt</a></li>
+                                            <li><a href="/about-our-firm/attorneys/allison-luttrell/">Allison H. Luttrell</a></li>
+                                            <li><a href="/about-our-firm/attorneys/madison-l-easterlin/">Madison L. Easterlin</a></li>
+                                            <li><a href="/about-our-firm/attorneys/haley-m-shaw/">Haley M. Shaw</a></li>
+                                            <li><a href="/about-our-firm/attorneys/jessica-alvarez/">Jessica Alvarez</a></li>
+                                            <li><a href="/about-our-firm/attorneys/rayasia-asia-alexis-myles/">Rayasia "Asia" Alexis Myles</a></li>
+                                            <li><a href="/about-our-firm/attorneys/brian-alpiger/">Brian Alpiger</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/practice-areas/" class="nav-link">Family Law</a>
+                        <div class="mega-menu">
+                            <div class="mega-content">
+                                <div class="mega-title">Family Law</div>
+                                <div class="mega-items">
+                                    <div class="mega-items-column">
+                                        <ul>
+                                            <li><a href="/fort-worth-divorce-lawyer/">Divorce</a></li>
+                                            <li><a href="/fort-worth-child-support-attorney/">Child Support</a></li>
+                                            <li><a href="/fort-worth-child-custody-attorney/">Child Custody</a></li>
+                                            <li><a href="/fort-worth-property-division-attorney/">Property Division</a></li>
+                                            <li><a href="/fort-worth-high-net-worth-divorce-lawyer/">High Net Worth Divorce</a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="mega-items-column">
+                                        <ul>
+                                            <li><a href="/mediation-attorney/">Mediation</a></li>
+                                            <li><a href="/fort-worth-prenuptial-agreements-attorney/">Prenuptial Agreements</a></li>
+                                            <li><a href="/fort-worth-postnuptial-agreements-attorney/">Postnuptial Agreements</a></li>
+                                            <li><a href="/fort-worth-appeals-attorney/">Appeals</a></li>
+                                            <li><a href="/mediation-attorney/">Collaborative Law</a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="mega-items-column">
+                                        <ul>
+                                            <li><a href="/fort-worth-grandparents-rights-attorney/">Grandparent Rights</a></li>
+                                            <li><a href="/fort-worth-child-custody-attorney/">Possession & Access</a></li>
+                                            <li><a href="/fort-worth-family-law-attorney/">Enforcement & Contempt</a></li>
+                                            <li><a href="/fort-worth-adoption-attorney/">Adoptions</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
+                        <div class="mega-menu">
+                            <div class="mega-content">
+                                <div class="mega-title">Business<br>Litigation</div>
+                                <div class="mega-items">
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/texas-business-litigation-attorney/">Business Litigation</a></h3>
+                                        <p>Claims, defence, injunctions</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/texas-business-litigation-attorney/">Contract Dispute</a></h3>
+                                        <p>Breach, performance, damages</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/texas-business-litigation-attorney/">Outside General Counsel</a></h3>
+                                        <p>Proactive advice for growth</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/about-our-firm/" class="nav-link">About</a>
+                        <div class="mega-menu">
+                            <div class="mega-content">
+                                <div class="mega-title">About</div>
+                                <div class="mega-items">
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/about-our-firm/">Awards & Accolades</a></h3>
+                                        <p>Recognition for excellence</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/about-our-firm/">Careers</a></h3>
+                                        <p>Join our team</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/blog/" class="nav-link">News & Resources</a>
+                        <div class="mega-menu">
+                            <div class="mega-content">
+                                <div class="mega-title">News &<br>Resources</div>
+                                <div class="mega-items">
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/blog/">Blog</a></h3>
+                                        <p>Legal insights and updates</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/blog/">Firm News</a></h3>
+                                        <p>Latest announcements</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/faqs/">FAQs</a></h3>
+                                        <p>Commonly asked questions</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/testimonials/">Testimonials</a></h3>
+                                        <p>Client success stories</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/contact-us/" class="nav-link">Locations</a>
+                        <div class="mega-menu">
+                            <div class="mega-content">
+                                <div class="mega-title">Locations</div>
+                                <div class="mega-items">
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/fort-worth-divorce-lawyer/">Fort Worth</a></h3>
+                                        <p>Main office location</p>
+                                    </div>
+                                    
+                                    <div class="mega-item-with-desc">
+                                        <h3><a href="/southlake-family-law-attorney/">Southlake</a></h3>
+                                        <p>Serving Southlake clients</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/contact-us/" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-          <!-- FAMILY LAW -->
-          <li class="nav-item" data-drop="fls">
-            <a href="/practice-areas/" class="nav-link">Family Law Services</a>
-            <div class="dropdown" id="drop-fls" role="menu" aria-hidden="true">
-              <div class="dropdown-inner">
-                <div class="link-grid">
-                  <a class="link-item" href="/fort-worth-divorce-lawyer/">
-                    <span class="link-title">Divorce</span>
-                    <span class="link-desc">Contested and uncontested matters</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-child-support-attorney/">
-                    <span class="link-title">Child Support</span>
-                    <span class="link-desc">Establishment, modification, enforcement</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-child-custody-attorney/">
-                    <span class="link-title">Child Custody</span>
-                    <span class="link-desc">Possession and access rights</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-property-division-attorney/">
-                    <span class="link-title">Property Division</span>
-                    <span class="link-desc">Equitable division of assets</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-high-net-worth-divorce-lawyer/">
-                    <span class="link-title">High Net Worth Divorce</span>
-                    <span class="link-desc">Complex assets and valuations</span>
-                  </a>
-                  <a class="link-item" href="/mediation-attorney/">
-                    <span class="link-title">Mediation</span>
-                    <span class="link-desc">Private dispute resolution</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-prenuptial-agreements-attorney/">
-                    <span class="link-title">Prenuptial Agreements</span>
-                    <span class="link-desc">Protect separate property</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-postnuptial-agreements-attorney/">
-                    <span class="link-title">Postnuptial Agreements</span>
-                    <span class="link-desc">Terms agreed after marriage begins</span>
-                  </a>
-                  <a class="link-item" href="/fort-worth-appeals-attorney/">
-                    <span class="link-title">Appeals</span>
-                    <span class="link-desc">Challenging outcomes</span>
-                  </a>
-                  <a class="link-item" href="/mediation-attorney/">
-                    <span class="link-title">Collaborative Law</span>
-                    <span class="link-desc">Team based solutions</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+    <script>
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
 
-          <!-- BUSINESS LITIGATION -->
-          <li class="nav-item" data-drop="bizlit">
-            <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
-            <div class="dropdown" id="drop-bizlit" role="menu" aria-hidden="true">
-              <div class="dropdown-inner">
-                <div class="
-```
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('mainNav');
+            const toggle = document.querySelector('.mobile-toggle');
+            
+            if (nav && toggle && !nav.contains(event.target) && !toggle.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
