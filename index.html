@@ -1,3 +1,8 @@
+Got it - I’ve removed the phone icon, widened and spaced the main nav so items sit more horizontally, made each mega menu full width across the viewport, and increased the vertical spacing between rows in Family Law so it is less cramped. I also kept everything in sans serif.
+
+Here is a drop-in replacement that implements your manager’s notes and mirrors the KoonsFuller style while using your Excel topics and subtopics.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,113 +11,108 @@
   <title>MBH Texas - Professional Header</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f8f9fa;line-height:1.6}
+    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;background:#f8f9fa;line-height:1.6}
 
     :root{
       --navy:#041E42;
       --silver:#869397;
-      --dark-gray:#4F4F4F;  /* darker grey for descriptions and names */
+      --dark-gray:#4F4F4F;
       --light-gray:#F5F5F5;
       --white:#FFFFFF;
-      --hover-blue:#1a4a72;
-      --title-blue:#00007C; /* main link colour */
+      --title-blue:#00007C;
     }
 
     .header{background:var(--white);box-shadow:0 2px 10px rgba(4,30,66,.1);position:relative;z-index:1000}
-    .header-container{width:100%;margin:0 auto;padding:0 20px}
+    .header-container{max-width:1320px;margin:0 auto;padding:0 24px}
 
-    /* Top bar */
-    .header-top{display:flex;justify-content:flex-end;align-items:center;padding:8px 30px;background:#BEBEBE;font-size:14px;border-bottom:1px solid #e0e0e0}
-    .header-top .header-cta{display:flex;align-items:center;gap:30px}
-    .header-top .phone{color:var(--dark-gray);font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:5px}
+    /* Top bar - no phone icon */
+    .header-top{display:flex;justify-content:flex-end;align-items:center;padding:8px 24px;background:#BEBEBE;font-size:14px;border-bottom:1px solid #e0e0e0}
+    .header-top .header-cta{display:flex;align-items:center;gap:28px}
+    .header-top .phone{color:var(--dark-gray);font-size:14px;font-weight:600;text-decoration:none}
     .header-top .phone:hover{color:var(--navy)}
-    .header-top .cta-button{background:#2E59D7;color:var(--white);padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.5px;transition:.3s}
-    .header-top .cta-button:hover{background:#1a4a72;transform:translateY(-1px)}
+    .header-top .cta-button{background:#2E59D7;color:var(--white);padding:8px 18px;border-radius:4px;text-decoration:none;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.4px;transition:.2s}
+    .header-top .cta-button:hover{filter:brightness(.95)}
 
     /* Main header */
-    .header-main{display:flex;align-items:center;width:100%;padding:15px 0}
+    .header-main{display:flex;align-items:center;width:100%;padding:16px 0}
     .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
-    .logo img{height:60px;width:auto;max-width:350px;object-fit:contain}
-    .flex-spacer{flex:1 1 auto}
-    nav{flex:0 0 auto}
+    .logo img{height:58px;width:auto;max-width:340px;object-fit:contain}
+    nav{flex:1} /* allow nav to stretch so items spread out horizontally */
 
-    .main-nav{display:flex;align-items:center;list-style:none;margin:0;padding:0;justify-content:flex-end}
-    .nav-item{position:relative;margin:0 10px}
-    .nav-link{display:block;padding:15px 20px;color:var(--dark-gray);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.8px;transition:.3s}
+    .main-nav{display:flex;align-items:center;list-style:none;margin:0;padding:0;gap:30px;justify-content:space-between}
+    .nav-item{position:relative}
+    .nav-link{display:block;padding:14px 8px;color:var(--dark-gray);text-decoration:none;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.8px;transition:.2s}
     .nav-link:hover{color:var(--navy)}
 
-    /* Dropdown panel - fixed and clamped by JS */
+    /* Full-width dropdown panel */
     .dropdown{
-      position:fixed; top:0; left:0;
-      max-width:min(96vw, 1100px);
+      position:fixed; left:0; width:100vw;
       background:var(--white);
-      box-shadow:0 8px 25px rgba(4,30,66,.15);
+      box-shadow:0 18px 35px rgba(4,30,66,.15);
       border-top:3px solid var(--navy);
       opacity:0; visibility:hidden; pointer-events:none;
-      transition:opacity .2s ease, transform .2s ease;
+      transition:opacity .18s ease, transform .18s ease;
       transform:translateY(-6px);
       z-index:999;
     }
     .dropdown.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
-    .dropdown-inner{padding:20px 24px}
+    .dropdown-inner{max-width:1320px;margin:0 auto;padding:22px 24px}
     .dropdown a{text-decoration:none}
 
-    /* Attorneys dropdown - two columns side by side */
-    .section-row{display:flex;gap:40px;justify-content:flex-start;align-items:flex-start;flex-wrap:nowrap}
-    .section{flex:1 1 50%;min-width:260px}
+    /* Attorneys - two columns across */
+    .section-row{display:flex;gap:48px;align-items:flex-start;flex-wrap:nowrap}
+    .section{flex:1 1 50%;min-width:280px}
     .section h4{
-      color:var(--title-blue);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;
+      color:var(--title-blue);font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;
       margin-bottom:10px;border-bottom:2px solid var(--silver);padding-bottom:6px;
     }
     .section ul{list-style:none}
     .section li{margin:8px 0}
-    .section a{color:var(--dark-gray);font-size:14px;font-weight:500;text-decoration:none}
+    .section a{color:var(--dark-gray);font-size:14px;font-weight:600}
     .section a:hover{color:var(--navy)}
 
-    /* Generic link grid (Family Law, Business Litigation, News, About) */
-    .link-grid{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-start}
-    .link-item{flex:0 1 240px}
-    .link-title{display:block;color:var(--title-blue);font-weight:700;font-size:14px;line-height:1.25;margin-bottom:4px}
-    .link-desc{display:block;color:var(--dark-gray);font-size:12.5px;line-height:1.35}
+    /* Generic link grid for mega menus */
+    .link-grid{display:flex;flex-wrap:wrap;gap:18px 36px;align-items:flex-start}
+    .link-item{flex:0 1 calc(25% - 36px)} /* four columns across on wide screens */
+    .link-title{display:block;color:var(--title-blue);font-weight:900;font-size:16px;line-height:1.25;margin-bottom:4px}
+    .link-desc{display:block;color:var(--dark-gray);font-size:14px;line-height:1.35}
 
-    .mobile-toggle{display:none;background:none;border:none;color:var(--dark-gray);font-size:24px;cursor:pointer;padding:10px}
+    /* Family Law - extra vertical spacing as requested */
+    #drop-fls .link-grid{row-gap:22px} /* slightly looser for readability */
+
+    .mobile-toggle{display:none;background:none;border:none;color:var(--dark-gray);font-size:28px;cursor:pointer;padding:10px}
 
     @media (max-width:1200px){
-      .nav-link{padding:15px 15px;font-size:13px}
+      .main-nav{gap:22px}
+      .link-item{flex:0 1 calc(33.333% - 36px)}
     }
     @media (max-width:992px){
-      .nav-link{padding:15px 12px;font-size:12px}
+      .link-item{flex:0 1 calc(50% - 36px)}
     }
     @media (max-width:768px){
       .header-container{padding:0 20px}
-      .header-top{padding:5px 20px}
-      .header-top .header-cta{gap:15px}
+      .header-top{padding:6px 20px}
       .mobile-toggle{display:block}
 
-      .main-nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);flex-direction:column;box-shadow:0 5px 20px rgba(0,0,0,.1);border-top:1px solid #e0e0e0}
+      .main-nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);flex-direction:column;box-shadow:0 12px 24px rgba(0,0,0,.1);border-top:1px solid #e0e0e0;padding:8px 0}
       .main-nav.active{display:flex}
-      .nav-item{width:100%;margin:0;border-bottom:1px solid #e0e0e0}
-      .nav-link{padding:18px 20px;font-size:14px;border:none}
+      .nav-item{width:100%;border-bottom:1px solid #eee}
+      .nav-link{padding:16px 20px;font-size:15px}
 
-      /* Mobile dropdowns become stacked blocks */
-      .dropdown{position:static;max-width:none;box-shadow:none;border-top:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}
+      /* Mobile dropdowns become inline blocks */
+      .dropdown{position:static;width:100%;box-shadow:none;border-top:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}
+      .dropdown-inner{max-width:none;padding:16px 20px}
       .section{flex:1 1 100%}
       .link-item{flex:1 1 100%}
-      .dropdown-inner{padding:16px}
-    }
-    @media (max-width:480px){
-      .header-container{padding:0 15px}
-      .header-top{padding:5px 15px}
-      .header-top .header-cta{flex-direction:column;gap:8px}
-      .logo img{height:35px}
     }
   </style>
 </head>
 <body>
-<header class="header">
+<header class="header" id="siteHeader">
   <div class="header-top">
     <div class="header-cta">
-      <a href="tel:817-345-6789" class="phone">☎ (817) 345-6789</a>
+      <!-- phone icon removed - plain tel link retained -->
+      <a href="tel:817-345-6789" class="phone">(817) 345-6789</a>
       <a href="/contact-us/" class="cta-button">Request Consultation</a>
     </div>
   </div>
@@ -122,13 +122,10 @@
       <a href="/" class="logo">
         <img src="https://i.ibb.co/KtCHhJr/Untitled-design.png" alt="MBH Fort Worth Family Law"/>
       </a>
-      <div class="flex-spacer"></div>
 
       <nav>
-        <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+        <button class="mobile-toggle" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
         <ul class="main-nav" id="mainNav">
-          <!-- Home removed per feedback -->
-
           <!-- ATTORNEYS -->
           <li class="nav-item" data-drop="attorneys">
             <a href="/about-our-firm/attorneys/" class="nav-link">Attorneys</a>
@@ -179,7 +176,7 @@
                   </a>
                   <a class="link-item" href="/fort-worth-child-custody-attorney/">
                     <span class="link-title">Child Custody</span>
-                    <span class="link-desc">Possession schedules and rights</span>
+                    <span class="link-desc">Possession and access rights</span>
                   </a>
                   <a class="link-item" href="/fort-worth-property-division-attorney/">
                     <span class="link-title">Property Division</span>
@@ -199,7 +196,7 @@
                   </a>
                   <a class="link-item" href="/fort-worth-postnuptial-agreements-attorney/">
                     <span class="link-title">Postnuptial Agreements</span>
-                    <span class="link-desc">Terms after marriage begins</span>
+                    <span class="link-desc">Terms agreed after marriage begins</span>
                   </a>
                   <a class="link-item" href="/fort-worth-appeals-attorney/">
                     <span class="link-title">Appeals</span>
@@ -219,135 +216,5 @@
             <a href="/texas-business-litigation-attorney/" class="nav-link">Business Litigation</a>
             <div class="dropdown" id="drop-bizlit" role="menu" aria-hidden="true">
               <div class="dropdown-inner">
-                <div class="link-grid">
-                  <a class="link-item" href="/texas-business-litigation-attorney/">
-                    <span class="link-title">Business Litigation</span>
-                    <span class="link-desc">Claims, defence, injunctions</span>
-                  </a>
-                  <a class="link-item" href="/texas-business-litigation-attorney/">
-                    <span class="link-title">Contract Disputes</span>
-                    <span class="link-desc">Breach, performance, damages</span>
-                  </a>
-                  <a class="link-item" href="/texas-business-litigation-attorney/">
-                    <span class="link-title">Outside General Counsel</span>
-                    <span class="link-desc">Proactive advice for growth</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- NEWS -->
-          <li class="nav-item" data-drop="news">
-            <a href="/blog/" class="nav-link">News &amp; Insights</a>
-            <div class="dropdown" id="drop-news" role="menu" aria-hidden="true">
-              <div class="dropdown-inner">
-                <div class="link-grid">
-                  <a class="link-item" href="/blog/">
-                    <span class="link-title">Blog</span>
-                    <span class="link-desc">Articles and updates</span>
-                  </a>
-                  <a class="link-item" href="/faqs/">
-                    <span class="link-title">FAQs</span>
-                    <span class="link-desc">Common questions answered</span>
-                  </a>
-                  <a class="link-item" href="/testimonials/">
-                    <span class="link-title">Testimonials</span>
-                    <span class="link-desc">Client experiences</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- ABOUT -->
-          <li class="nav-item" data-drop="about">
-            <a href="/about-our-firm/" class="nav-link">About</a>
-            <div class="dropdown" id="drop-about" role="menu" aria-hidden="true">
-              <div class="dropdown-inner">
-                <div class="link-grid">
-                  <a class="link-item" href="/about-our-firm/">
-                    <span class="link-title">Our Story</span>
-                    <span class="link-desc">Dedicated counsel serving Fort Worth</span>
-                  </a>
-                  <a class="link-item" href="/about-our-firm/">
-                    <span class="link-title">Awards &amp; Accolades</span>
-                    <span class="link-desc">Recognition for excellence</span>
-                  </a>
-                  <a class="link-item" href="/about-our-firm/">
-                    <span class="link-title">Careers</span>
-                    <span class="link-desc">Join our team</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li class="nav-item"><a href="/contact-us/" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
-
-<script>
-  function toggleMobileMenu(){
-    const nav=document.getElementById('mainNav');
-    nav.classList.toggle('active');
-  }
-
-  // Viewport-aware dropdown positioning with clamping
-  const SAFE_MARGIN = 16; // px
-  const items = document.querySelectorAll('.nav-item');
-
-  items.forEach(item=>{
-    const panel = item.querySelector('.dropdown');
-    if(!panel) return;
-
-    const open = () => { panel.classList.add('show'); positionPanel(item, panel); };
-    const close = () => panel.classList.remove('show');
-
-    item.addEventListener('mouseenter', open);
-    item.addEventListener('mouseleave', (e)=>{
-      if(!panel.contains(e.relatedTarget)) close();
-    });
-    item.addEventListener('focusin', open);
-
-    panel.addEventListener('mouseenter', ()=>panel.classList.add('show'));
-    panel.addEventListener('mouseleave', close);
-    window.addEventListener('resize', ()=>{ if(panel.classList.contains('show')) positionPanel(item, panel); });
-    window.addEventListener('scroll', ()=>{ if(panel.classList.contains('show')) positionPanel(item, panel); }, {passive:true});
-  });
-
-  function positionPanel(item, panel){
-    // Reset before measuring
-    panel.style.left='0px'; panel.style.top='0px';
-
-    const itemRect = item.getBoundingClientRect();
-
-    // Ensure we measure its natural size
-    const wasHidden = !panel.classList.contains('show');
-    if(wasHidden) panel.classList.add('show');
-
-    const panelRect = panel.getBoundingClientRect();
-
-    let left = itemRect.left + itemRect.width/2 - panelRect.width/2;
-    left = Math.max(SAFE_MARGIN, Math.min(left, window.innerWidth - panelRect.width - SAFE_MARGIN));
-
-    const top = itemRect.bottom + window.scrollY;
-
-    panel.style.left = `${left}px`;
-    panel.style.top  = `${top}px`;
-
-    if(wasHidden) panel.classList.remove('show');
-  }
-
-  // Close mobile menu when clicking outside
-  document.addEventListener('click',function(e){
-    const nav=document.getElementById('mainNav');
-    const toggle=document.querySelector('.mobile-toggle');
-    if(!nav.contains(e.target) && !toggle.contains(e.target)){ nav.classList.remove('active'); }
-  });
-</script>
-</body>
-</html>
+                <div class="
+```
