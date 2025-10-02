@@ -197,8 +197,14 @@
             opacity: 0.9;
         }
 
-        .mega-items ul {
+        .mega-items-column ul {
             list-style: none;
+            margin-top: 0;
+        }
+        
+        /* Align columns without headings */
+        .mega-items-column:not(:has(.mega-section-title)) ul {
+            margin-top: 34px;
         }
 
         .mega-items li {
