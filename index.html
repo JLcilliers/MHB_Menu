@@ -122,20 +122,23 @@
 
         /* Semi-Transparent Black Dropdown Bar */
         .mega-menu {
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: auto;
             left: 0;
             right: 0;
             width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
             z-index: 999;
+        }
+        
+        .nav-item:hover .mega-menu {
+            top: 100%;
         }
 
         .nav-item:hover .mega-menu {
@@ -357,6 +360,12 @@
                                         <li><a href="/about-our-firm/attorneys/constance-mims/">Constance Mims</a></li>
                                         <li><a href="/about-our-firm/attorneys/bryan-ballew/">Bryan Ballew</a></li>
                                         <li><a href="/about-our-firm/attorneys/matt-riek/">Matt Riek</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="mega-items-column">
+                                    <div class="mega-section-title">Partners</div>
+                                    <ul>
                                         <li><a href="/about-our-firm/attorneys/kelly-hollingsworth/">Kelly Hollingsworth</a></li>
                                         <li><a href="/about-our-firm/attorneys/tim-alexander/">Tim Alexander</a></li>
                                         <li><a href="/about-our-firm/attorneys/andrew-mcalester/">Andrew McAlester</a></li>
@@ -370,6 +379,12 @@
                                         <li><a href="/about-our-firm/attorneys/allison-luttrell/">Allison H. Luttrell</a></li>
                                         <li><a href="/about-our-firm/attorneys/madison-l-easterlin/">Madison L. Easterlin</a></li>
                                         <li><a href="/about-our-firm/attorneys/haley-m-shaw/">Haley M. Shaw</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="mega-items-column">
+                                    <div class="mega-section-title">Attorneys</div>
+                                    <ul>
                                         <li><a href="/about-our-firm/attorneys/jessica-alvarez/">Jessica Alvarez</a></li>
                                         <li><a href="/about-our-firm/attorneys/rayasia-asia-alexis-myles/">Rayasia "Asia" Alexis Myles</a></li>
                                         <li><a href="/about-our-firm/attorneys/brian-alpiger/">Brian Alpiger</a></li>
