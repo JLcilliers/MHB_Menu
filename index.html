@@ -18,7 +18,10 @@
         }
 
         :root {
+            --royal-blue: #003594;
             --navy: #041E42;
+            --silver: #869397;
+            --silver-green: #7F9695;
             --white: #FFFFFF;
             --black: #000000;
         }
@@ -81,7 +84,7 @@
         }
 
         .cta-button:hover {
-            background: #1a4a72;
+            background: var(--royal-blue);
         }
 
         /* Navigation */
@@ -117,7 +120,7 @@
         }
 
         .nav-link:hover {
-            color: var(--navy);
+            color: var(--royal-blue);
         }
 
         /* Semi-Transparent Black Dropdown Bar */
@@ -127,8 +130,8 @@
             left: 0;
             right: 0;
             width: 100vw;
-            background: rgba(0, 0, 0, 0.80);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.70);
+            backdrop-filter: blur(10px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             opacity: 0;
             visibility: hidden;
@@ -185,13 +188,13 @@
         }
 
         .mega-section-title {
-            color: var(--white);
+            color: var(--silver-green);
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 20px;
-            opacity: 0.6;
+            opacity: 0.9;
         }
 
         .mega-items ul {
